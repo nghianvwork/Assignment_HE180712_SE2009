@@ -1,4 +1,4 @@
-import axiosClient from '../api/axiosClient'
+import axiosClient from './axiosClient'
 
 export function getRooms(params) {
   return axiosClient.get('/rooms', { params })

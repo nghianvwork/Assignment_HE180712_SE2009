@@ -1,4 +1,4 @@
-import axiosClient from '../api/axiosClient'
+import axiosClient from './axiosClient'
 
 /**
  * Đăng nhập bằng email HOẶC username + password.
