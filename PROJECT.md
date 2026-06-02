@@ -152,7 +152,7 @@ npm run dev
 - [x] Tài liệu mô tả dự án
 - [x] Cài đặt dependencies & script json-server (`npm run server`)
 - [x] Setup axios, router, react-bootstrap, AuthContext
-- [x] Đăng nhập / Đăng ký (giao diện Aurelian Reserve + nối API json-server)
+- [x] Đăng nhập / Đăng ký (giao diện Hotel Luxury + nối API json-server)
 - [ ] Chức năng User (duyệt, đặt phòng)
 - [ ] Trang Manager (CRUD hotel/room/service)
 - [ ] Trang Admin (quản lý hệ thống)

@@ -2,7 +2,7 @@
 export default function AuthVisual() {
   return (
     <div className="lux-visual">
-      <div className="lux-brand">Aurelian Reserve</div>
+      <div className="lux-brand">Hotel Luxury</div>
       <div className="lux-tagline">
         Nơi lưu giữ những kỳ nghỉ đẳng cấp và trọn vẹn.
       </div>
