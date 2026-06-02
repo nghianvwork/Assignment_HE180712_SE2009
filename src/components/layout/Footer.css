@@ -1,0 +1,85 @@
+.lux-footer {
+  background: #141414;
+  color: #cfc8bb;
+  padding: 70px 0 0;
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+.lux-footer-inner {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 60px;
+  justify-content: space-between;
+}
+
+.lux-footer-brand {
+  max-width: 340px;
+}
+.lux-footer-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 24px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #fff;
+  margin-bottom: 16px;
+}
+.lux-footer-brand p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #9a9281;
+  margin-bottom: 20px;
+}
+.lux-footer-since {
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #9c7a4d;
+}
+
+.lux-footer-cols {
+  display: flex;
+  gap: 70px;
+  flex-wrap: wrap;
+}
+.lux-footer-col h4 {
+  font-size: 13px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #fff;
+  margin-bottom: 18px;
+}
+.lux-footer-col ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.lux-footer-col a {
+  color: #9a9281;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
+.lux-footer-col a:hover {
+  color: #e8d9bf;
+}
+
+.lux-footer-bottom {
+  max-width: 1240px;
+  margin: 50px auto 0;
+  padding: 24px 32px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: #6e6759;
+}

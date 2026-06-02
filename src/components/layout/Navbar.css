@@ -1,0 +1,177 @@
+.lux-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  transition: background 0.4s ease, box-shadow 0.4s ease, padding 0.4s ease;
+  padding: 22px 0;
+}
+.lux-nav.is-scrolled {
+  background: rgba(246, 244, 241, 0.92);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.07);
+  padding: 14px 0;
+}
+
+.lux-nav-inner {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.lux-nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-decoration: none;
+  color: #fff;
+  text-transform: uppercase;
+  transition: color 0.4s ease;
+  white-space: nowrap;
+}
+.lux-nav.is-scrolled .lux-nav-logo {
+  color: #1a1a1a;
+}
+
+.lux-nav-links {
+  display: flex;
+  gap: 34px;
+}
+.lux-nav-links a {
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  font-size: 14px;
+  letter-spacing: 0.5px;
+  position: relative;
+  transition: color 0.3s ease;
+}
+.lux-nav-links a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 0;
+  height: 1px;
+  background: #9c7a4d;
+  transition: width 0.3s ease;
+}
+.lux-nav-links a:hover {
+  color: #e8d9bf;
+}
+.lux-nav-links a:hover::after {
+  width: 100%;
+}
+.lux-nav.is-scrolled .lux-nav-links a {
+  color: #4a4438;
+}
+.lux-nav.is-scrolled .lux-nav-links a:hover {
+  color: #9c7a4d;
+}
+
+.lux-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.lux-nav-user {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.lux-nav-hello {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.9);
+  transition: color 0.4s ease;
+}
+.lux-nav.is-scrolled .lux-nav-hello {
+  color: #4a4438;
+}
+
+.lux-nav-btn {
+  padding: 10px 22px;
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 1px solid #141414;
+  background: #141414;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  white-space: nowrap;
+}
+.lux-nav-btn:hover {
+  background: #9c7a4d;
+  border-color: #9c7a4d;
+  color: #fff;
+}
+.lux-nav-btn.ghost {
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.6);
+  color: #fff;
+}
+.lux-nav.is-scrolled .lux-nav-btn.ghost {
+  border-color: #c9c0b0;
+  color: #1a1a1a;
+}
+.lux-nav-btn.ghost:hover {
+  border-color: #9c7a4d;
+  color: #9c7a4d;
+  background: transparent;
+}
+
+/* Burger (mobile) */
+.lux-nav-burger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+}
+.lux-nav-burger span {
+  width: 24px;
+  height: 2px;
+  background: #fff;
+  transition: background 0.4s ease;
+}
+.lux-nav.is-scrolled .lux-nav-burger span {
+  background: #1a1a1a;
+}
+
+@media (max-width: 880px) {
+  .lux-nav-links {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 0;
+    background: rgba(20, 20, 20, 0.97);
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+  }
+  .lux-nav-links.is-open {
+    max-height: 280px;
+  }
+  .lux-nav-links a {
+    padding: 16px 32px;
+    color: #f3efe7 !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .lux-nav-burger {
+    display: flex;
+  }
+  .lux-nav-btn.ghost {
+    display: none;
+  }
+}

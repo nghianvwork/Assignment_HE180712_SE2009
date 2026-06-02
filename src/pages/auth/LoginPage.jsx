@@ -56,7 +56,7 @@ export default function LoginPage() {
 
       <div className="lux-panel">
         <form className="lux-form" onSubmit={handleSubmit} noValidate>
-          <div className="lux-eyebrow">Aurelian Reserve</div>
+          <div className="lux-eyebrow">Hotel Luxury</div>
           <h1 className="lux-title">Welcome Back</h1>
           <p className="lux-subtitle">
             Vui lòng nhập thông tin để truy cập tài khoản của bạn.

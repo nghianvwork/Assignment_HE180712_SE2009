@@ -82,7 +82,7 @@ export default function RegisterPage() {
 
       <div className="lux-panel">
         <form className="lux-form" onSubmit={handleSubmit} noValidate>
-          <div className="lux-eyebrow">Aurelian Reserve</div>
+          <div className="lux-eyebrow">Hotel Luxury</div>
           <h1 className="lux-title">Join the Club</h1>
           <p className="lux-subtitle">
             Tạo tài khoản để bắt đầu hành trình nghỉ dưỡng của bạn.

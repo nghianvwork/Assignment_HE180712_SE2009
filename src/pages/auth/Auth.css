@@ -1,4 +1,4 @@
-/* ===== Hệ thiết kế dùng chung cho Login & Register (Aurelian Reserve) ===== */
+/* ===== Hệ thiết kế dùng chung cho Login & Register (Hotel Luxury) ===== */
 .lux-auth {
   display: flex;
   min-height: 100vh;
@@ -31,7 +31,7 @@
 }
 
 .lux-visual .lux-tagline {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Inter', system-ui, sans-serif;
   font-size: 40px;
   line-height: 1.25;
   font-weight: 600;
@@ -69,7 +69,7 @@
 }
 
 .lux-title {
-  font-family: 'Playfair Display', serif;
+  font-family: 'Inter', system-ui, sans-serif;
   font-size: 34px;
   font-weight: 600;
   color: #1a1a1a;
