@@ -1,0 +1,297 @@
+/* ===== Hệ thiết kế dùng chung cho Login & Register (Aurelian Reserve) ===== */
+.lux-auth {
+  display: flex;
+  min-height: 100vh;
+  background: #f6f4f1;
+  font-family: 'Inter', system-ui, sans-serif;
+  color: #2b2b2b;
+}
+
+/* --- Panel ảnh bên trái --- */
+.lux-visual {
+  position: relative;
+  flex: 1 1 0;
+  background:
+    linear-gradient(180deg, rgba(15, 18, 28, 0.55), rgba(15, 18, 28, 0.85)),
+    url('https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1400&q=80')
+      center/cover no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 48px;
+  color: #f3efe7;
+}
+
+.lux-visual .lux-brand {
+  font-family: 'Playfair Display', serif;
+  font-size: 15px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: #e8d9bf;
+}
+
+.lux-visual .lux-tagline {
+  font-family: 'Playfair Display', serif;
+  font-size: 40px;
+  line-height: 1.25;
+  font-weight: 600;
+  max-width: 460px;
+}
+
+.lux-visual .lux-since {
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(232, 217, 191, 0.75);
+}
+
+/* --- Panel form bên phải --- */
+.lux-panel {
+  flex: 0 0 clamp(360px, 42%, 560px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 28px;
+}
+
+.lux-form {
+  width: 100%;
+  max-width: 380px;
+}
+
+.lux-eyebrow {
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #9c7a4d;
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+
+.lux-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 34px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0 0 8px;
+}
+
+.lux-subtitle {
+  color: #9c7a4d;
+  font-size: 14px;
+  line-height: 1.5;
+  margin-bottom: 30px;
+}
+
+/* --- Field gạch chân --- */
+.lux-field {
+  margin-bottom: 22px;
+}
+
+.lux-field-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 6px;
+}
+
+.lux-label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: #6b5a3e;
+  text-transform: none;
+}
+
+.lux-link-mini {
+  font-size: 12px;
+  color: #9c7a4d;
+  text-decoration: none;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+.lux-link-mini:hover {
+  text-decoration: underline;
+}
+
+.lux-input-wrap {
+  position: relative;
+}
+
+.lux-input {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #d8d2c6;
+  border-radius: 0;
+  background: transparent;
+  padding: 8px 0;
+  font-size: 15px;
+  color: #2b2b2b;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.lux-input::placeholder {
+  color: #b8b0a2;
+}
+.lux-input:focus {
+  border-bottom-color: #9c7a4d;
+}
+.lux-input.is-error {
+  border-bottom-color: #c0392b;
+}
+
+.lux-eye {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  padding: 4px;
+  color: #9b9384;
+  cursor: pointer;
+  display: flex;
+}
+.lux-eye:hover {
+  color: #6b5a3e;
+}
+
+.lux-error {
+  color: #c0392b;
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+/* --- Checkbox --- */
+.lux-check {
+  display: flex;
+  align-items: flex-start;
+  gap: 9px;
+  margin-bottom: 26px;
+  font-size: 13px;
+  color: #5a5346;
+}
+.lux-check input {
+  margin-top: 2px;
+  accent-color: #9c7a4d;
+}
+.lux-check a {
+  color: #9c7a4d;
+}
+
+/* --- Nút chính --- */
+.lux-btn {
+  width: 100%;
+  background: #141414;
+  color: #fff;
+  border: none;
+  padding: 15px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.lux-btn:hover:not(:disabled) {
+  background: #9c7a4d;
+}
+.lux-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* --- Divider --- */
+.lux-divider {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin: 26px 0;
+  color: #a59d8e;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+.lux-divider::before,
+.lux-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #e2dccf;
+}
+
+/* --- Nút social --- */
+.lux-social {
+  display: flex;
+  gap: 14px;
+}
+.lux-social button {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 11px;
+  background: #fff;
+  border: 1px solid #e2dccf;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #2b2b2b;
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.lux-social button:hover {
+  border-color: #9c7a4d;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+/* --- Footer chuyển trang --- */
+.lux-switch {
+  text-align: center;
+  margin-top: 28px;
+  font-size: 14px;
+  color: #6b6355;
+}
+.lux-switch a {
+  color: #1a1a1a;
+  font-weight: 600;
+  text-decoration: none;
+}
+.lux-switch a:hover {
+  color: #9c7a4d;
+}
+
+.lux-legal {
+  display: flex;
+  justify-content: center;
+  gap: 22px;
+  margin-top: 30px;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #b3ab9c;
+}
+.lux-legal a {
+  color: inherit;
+  text-decoration: none;
+}
+.lux-legal a:hover {
+  color: #9c7a4d;
+}
+
+/* --- Responsive: ẩn panel ảnh trên màn nhỏ --- */
+@media (max-width: 860px) {
+  .lux-visual {
+    display: none;
+  }
+  .lux-panel {
+    flex: 1;
+  }
+}
