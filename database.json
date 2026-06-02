@@ -1,0 +1,279 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "username": "admin",
+      "password": "admin123",
+      "fullName": "Quản Trị Viên Hệ Thống",
+      "email": "admin@hotel.com",
+      "phone": "0901234567",
+      "role": "admin",
+      "status": "active"
+    },
+    {
+      "id": "2",
+      "username": "manager1",
+      "password": "manager123",
+      "fullName": "Lê Văn Quản Lý",
+      "email": "manager1@hotel.com",
+      "phone": "0911111111",
+      "role": "manager",
+      "status": "active"
+    },
+    {
+      "id": "3",
+      "username": "manager2",
+      "password": "manager123",
+      "fullName": "Phạm Thị Điều Hành",
+      "email": "manager2@hotel.com",
+      "phone": "0922222222",
+      "role": "manager",
+      "status": "active"
+    },
+    {
+      "id": "4",
+      "username": "user",
+      "password": "user123",
+      "fullName": "Nguyễn Văn A",
+      "email": "vana@gmail.com",
+      "phone": "0912345678",
+      "role": "user",
+      "status": "active"
+    },
+    {
+      "id": "5",
+      "username": "tranthib",
+      "password": "123456",
+      "fullName": "Trần Thị B",
+      "email": "thib@gmail.com",
+      "phone": "0987654321",
+      "role": "user",
+      "status": "active"
+    }
+  ],
+  "hotels": [
+    {
+      "id": "1",
+      "name": "Grand Ocean Resort",
+      "ownerId": "2",
+      "address": "12 Trần Phú, Nha Trang, Khánh Hòa",
+      "city": "Nha Trang",
+      "image": "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80",
+      "description": "Khu nghỉ dưỡng 5 sao ven biển với hồ bơi vô cực và bãi biển riêng.",
+      "rating": 4.8,
+      "status": "active"
+    },
+    {
+      "id": "2",
+      "name": "Saigon Central Hotel",
+      "ownerId": "2",
+      "address": "88 Lê Lợi, Quận 1, TP. Hồ Chí Minh",
+      "city": "Hồ Chí Minh",
+      "image": "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800&q=80",
+      "description": "Khách sạn trung tâm thành phố, thuận tiện di chuyển và mua sắm.",
+      "rating": 4.5,
+      "status": "active"
+    },
+    {
+      "id": "3",
+      "name": "Hanoi Heritage Hotel",
+      "ownerId": "3",
+      "address": "25 Hàng Bài, Hoàn Kiếm, Hà Nội",
+      "city": "Hà Nội",
+      "image": "https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=800&q=80",
+      "description": "Khách sạn mang phong cách cổ điển giữa lòng phố cổ Hà Nội.",
+      "rating": 4.6,
+      "status": "active"
+    }
+  ],
+  "rooms": [
+    {
+      "id": "1",
+      "hotelId": "1",
+      "name": "Phòng Deluxe Hướng Biển",
+      "type": "Deluxe",
+      "price": 1200000,
+      "image": "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&q=80",
+      "description": "Phòng cao cấp với ban công riêng nhìn ra biển, nội thất sang trọng.",
+      "capacity": 2,
+      "bedType": "1 giường King",
+      "size": 35,
+      "available": true,
+      "amenities": [
+        "WiFi miễn phí",
+        "Điều hòa",
+        "Smart TV",
+        "Minibar",
+        "Ban công"
+      ]
+    },
+    {
+      "id": "2",
+      "hotelId": "1",
+      "name": "Phòng Presidential Suite",
+      "type": "Suite",
+      "price": 5000000,
+      "image": "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=800&q=80",
+      "description": "Phòng tổng thống đẳng cấp với tầm nhìn toàn cảnh và butler riêng.",
+      "capacity": 4,
+      "bedType": "1 giường King + 1 giường đôi",
+      "size": 100,
+      "available": true,
+      "amenities": [
+        "WiFi miễn phí",
+        "Jacuzzi",
+        "Phòng ăn riêng",
+        "Butler riêng",
+        "Quầy bar"
+      ]
+    },
+    {
+      "id": "3",
+      "hotelId": "2",
+      "name": "Phòng Standard",
+      "type": "Standard",
+      "price": 700000,
+      "image": "https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=800&q=80",
+      "description": "Phòng tiêu chuẩn tiện nghi, phù hợp khách công tác.",
+      "capacity": 2,
+      "bedType": "1 giường đôi",
+      "size": 25,
+      "available": true,
+      "amenities": [
+        "WiFi miễn phí",
+        "Điều hòa",
+        "TV màn hình phẳng",
+        "Tủ lạnh mini"
+      ]
+    },
+    {
+      "id": "4",
+      "hotelId": "2",
+      "name": "Phòng Superior Twin",
+      "type": "Superior",
+      "price": 950000,
+      "image": "https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=800&q=80",
+      "description": "Phòng hai giường đơn hiện đại, lý tưởng cho bạn bè đi cùng.",
+      "capacity": 2,
+      "bedType": "2 giường đơn",
+      "size": 30,
+      "available": true,
+      "amenities": [
+        "WiFi miễn phí",
+        "Điều hòa",
+        "Bàn làm việc",
+        "Két sắt"
+      ]
+    },
+    {
+      "id": "5",
+      "hotelId": "3",
+      "name": "Phòng Heritage Suite",
+      "type": "Suite",
+      "price": 1800000,
+      "image": "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=80",
+      "description": "Phòng suite phong cách cổ điển với nội thất gỗ sang trọng.",
+      "capacity": 3,
+      "bedType": "1 giường King",
+      "size": 45,
+      "available": true,
+      "amenities": [
+        "WiFi miễn phí",
+        "Điều hòa",
+        "Smart TV",
+        "Bồn tắm",
+        "Phòng khách"
+      ]
+    },
+    {
+      "id": "6",
+      "hotelId": "3",
+      "name": "Phòng Standard Đơn",
+      "type": "Standard",
+      "price": 500000,
+      "image": "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800&q=80",
+      "description": "Phòng đơn tiết kiệm, gọn gàng cho khách du lịch một mình.",
+      "capacity": 1,
+      "bedType": "1 giường đơn",
+      "size": 18,
+      "available": false,
+      "amenities": [
+        "WiFi miễn phí",
+        "Điều hòa",
+        "TV",
+        "Bàn làm việc"
+      ]
+    }
+  ],
+  "services": [
+    {
+      "id": "1",
+      "hotelId": "1",
+      "name": "Spa & Massage",
+      "price": 500000,
+      "image": "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=800&q=80",
+      "description": "Dịch vụ spa thư giãn với liệu trình massage chuyên nghiệp.",
+      "available": true
+    },
+    {
+      "id": "2",
+      "hotelId": "1",
+      "name": "Đưa đón sân bay",
+      "price": 300000,
+      "image": "https://images.unsplash.com/photo-1494515843082-85f73abeee03?w=800&q=80",
+      "description": "Dịch vụ xe đưa đón sân bay tận nơi, đúng giờ.",
+      "available": true
+    },
+    {
+      "id": "3",
+      "hotelId": "2",
+      "name": "Buffet sáng",
+      "price": 200000,
+      "image": "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80",
+      "description": "Buffet sáng đa dạng món Á - Âu phục vụ từ 6h-10h.",
+      "available": true
+    },
+    {
+      "id": "4",
+      "hotelId": "3",
+      "name": "Tour phố cổ",
+      "price": 400000,
+      "image": "https://images.unsplash.com/photo-1509023464722-18d996393ca8?w=800&q=80",
+      "description": "Tour tham quan phố cổ Hà Nội cùng hướng dẫn viên.",
+      "available": true
+    }
+  ],
+  "bookings": [
+    {
+      "id": "1",
+      "userId": "4",
+      "hotelId": "1",
+      "roomId": "1",
+      "serviceIds": [
+        "1"
+      ],
+      "checkIn": "2026-06-10",
+      "checkOut": "2026-06-12",
+      "guests": 2,
+      "nights": 2,
+      "totalPrice": 2900000,
+      "status": "confirmed",
+      "createdAt": "2026-06-01T10:30:00.000Z"
+    },
+    {
+      "id": "2",
+      "userId": "5",
+      "hotelId": "2",
+      "roomId": "3",
+      "serviceIds": [],
+      "checkIn": "2026-06-15",
+      "checkOut": "2026-06-18",
+      "guests": 2,
+      "nights": 3,
+      "totalPrice": 2100000,
+      "status": "pending",
+      "createdAt": "2026-06-02T08:15:00.000Z"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
