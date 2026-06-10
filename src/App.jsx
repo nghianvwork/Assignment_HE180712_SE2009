@@ -4,6 +4,13 @@ import HomePage from './pages/HomePage'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
 import ProtectedRoute from './components/ProtectedRoute'
+import AdminLayout from './pages/admin/AdminLayout'
+import AdminDashboard from './pages/admin/AdminDashboard'
+import AdminUsers from './pages/admin/AdminUsers'
+import AdminHotels from './pages/admin/AdminHotels'
+import AdminRooms from './pages/admin/AdminRooms'
+import AdminServices from './pages/admin/AdminServices'
+import AdminBookings from './pages/admin/AdminBookings'
 
 // Trang tạm cho các khu vực sẽ làm sau
 function Placeholder({ title }) {
@@ -22,14 +29,23 @@ function App() {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
 
+      {/* Khu vực quản trị — chỉ admin */}
       <Route
         path="/admin"
         element={
           <ProtectedRoute roles={['admin']}>
-            <Placeholder title="Trang quản trị (Admin)" />
+            <AdminLayout />
           </ProtectedRoute>
         }
-      />
+      >
+        <Route index element={<AdminDashboard />} />
+        <Route path="users" element={<AdminUsers />} />
+        <Route path="hotels" element={<AdminHotels />} />
+        <Route path="rooms" element={<AdminRooms />} />
+        <Route path="services" element={<AdminServices />} />
+        <Route path="bookings" element={<AdminBookings />} />
+      </Route>
+
       <Route
         path="/manager"
         element={
