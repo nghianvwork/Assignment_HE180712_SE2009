@@ -148,4 +148,4 @@ npm run dev
 - [x] Đăng nhập / Đăng ký (giao diện Hotel Luxury + nối API json-server)
 - [ ] Chức năng User (duyệt, đặt phòng)
 - [ ] Trang Manager (CRUD hotel/room/service)
-- [ ] Trang Admin (quản lý hệ thống)
+- [x] Trang Admin (quản lý hệ thống: dashboard, users, hotels, rooms, services, bookings)
