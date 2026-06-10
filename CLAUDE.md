@@ -12,18 +12,19 @@ The current `src/App.jsx` is still the Vite starter template and is expected to 
 
 ```bash
 npm run dev        # Vite dev server (http://localhost:5173)
+npm run server     # json-server fake backend on port 9999 (watches db/database.json)
 npm run build      # production build to dist/
 npm run preview    # preview the production build
 npm run lint       # ESLint over all .js/.jsx
 ```
 
-`json-server` is not installed yet. The intended fake backend runs on **port 9999** (e.g. `npx json-server --watch database.json --port 9999`); add a `server` npm script when wiring it up. Run frontend and json-server in two separate terminals.
+Run `npm run dev` and `npm run server` in two separate terminals. The frontend's API base URL comes from `VITE_API_URL` (see `.env.example`), falling back to `http://localhost:9999`.
 
 No test runner is configured.
 
 ## Architecture
 
-**Data model lives in `database.json`** — five collections with these relationships:
+**Data model lives in `db/database.json`** — five collections with these relationships:
 - `hotels.ownerId` → `users.id` (a *manager* owns hotels)
 - `rooms.hotelId` / `services.hotelId` → `hotels.id`
 - `bookings` references `userId`, `hotelId`, `roomId`, and `serviceIds[]`
@@ -32,7 +33,7 @@ No test runner is configured.
 - **Critical:** json-server enforces no authorization. All access control is **client-side only** — route guards plus filtering data by `ownerId` (manager sees only their own hotels) and `userId` (user sees only their own bookings). Never assume the API restricts anything.
 - Booking status flow: `pending` → `confirmed` → `cancelled`.
 
-Planned frontend layering (see `PROJECT.md` §6): `api/axiosClient.js` (single axios instance) → `services/*` (one per collection) → `context/AuthContext.jsx` (login state + role in localStorage) → `pages/` split into `admin/`, `manager/`, and user-facing pages, gated by a `ProtectedRoute` component.
+Frontend layering is a flat structure grouped by file type: `services/axiosClient.js` (single axios instance, base URL from `VITE_API_URL` env, falls back to `localhost:9999`) → `services/*` (one per collection) → `context/AuthContext.jsx` (login state + role in localStorage) → `pages/` (HomePage, LoginPage, RegisterPage...) and `components/` (Navbar, Footer, ProtectedRoute, Reveal). Routes are declared directly in `App.jsx`; role-gated routes wrap elements in `ProtectedRoute`.
 
 ## Conventions
 

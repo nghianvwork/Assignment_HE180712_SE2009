@@ -51,7 +51,7 @@ Xây dựng một nền tảng đặt phòng khách sạn nhiều chi nhánh (mu
 
 ---
 
-## 4. 🗄️ Mô hình dữ liệu (`database.json`)
+## 4. 🗄️ Mô hình dữ liệu (`db/database.json`)
 
 ```jsonc
 {
@@ -99,24 +99,17 @@ Xây dựng một nền tảng đặt phòng khách sạn nhiều chi nhánh (mu
 
 ## 6. 📁 Cấu trúc thư mục (dự kiến)
 
+Cấu trúc phẳng, đơn giản — gom theo loại file:
+
 ```
 src/
-├── api/axiosClient.js          # cấu hình axios, baseURL
-├── services/                   # authService, hotelService, roomService,
-│                               #   serviceService, bookingService, userService
-├── context/AuthContext.jsx     # đăng nhập/đăng xuất, lưu user + role
-├── components/
-│   ├── layout/   Header, Footer, Layout
-│   ├── hotel/    HotelCard, HotelList
-│   ├── room/     RoomCard, RoomFilter
-│   └── common/   ProtectedRoute, Loading
-├── pages/
-│   ├── HomePage, HotelDetailPage, RoomDetailPage, BookingPage
-│   ├── LoginPage, RegisterPage, MyBookingsPage
-│   ├── manager/  ManagerHotels, ManagerRooms, ManagerServices, ManagerBookings
-│   └── admin/    AdminUsers, AdminHotels, AdminBookings
-├── routes/AppRoutes.jsx
-└── App.jsx
+├── services/         # axiosClient + authService, hotelService, roomService...
+├── context/          # AuthContext.jsx (đăng nhập/đăng xuất, lưu user + role)
+├── components/        # Navbar, Footer, ProtectedRoute, Reveal (+ .css đi kèm)
+├── pages/            # HomePage, LoginPage, RegisterPage... (+ Home.css, Auth.css)
+├── utils/            # format.js (tiện ích, vd định dạng tiền VND)
+├── App.jsx           # khai báo toàn bộ route
+└── main.jsx          # BrowserRouter + AuthProvider + ToastContainer
 ```
 
 ---
