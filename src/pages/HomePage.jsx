@@ -4,6 +4,7 @@ import { toast } from 'react-toastify'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import Reveal from '../components/Reveal'
+import RevealText from '../components/RevealText'
 import { getHotels } from '../services/hotelService'
 import { getRooms } from '../services/roomService'
 import { formatVND } from '../utils/format'
@@ -81,7 +82,13 @@ export default function HomePage() {
         <div className="hero-content">
           <p className="hero-eyebrow">Hotel Luxury · Exclusively since 1924</p>
           <h1 className="hero-title">
-            Nơi sự thanh lịch <br /> gặp gỡ đường chân trời
+            <RevealText as="span" className="ht-line" text="Nơi sự thanh lịch" />
+            <RevealText
+              as="span"
+              className="ht-line"
+              text="gặp gỡ đường chân trời"
+              startDelay={320}
+            />
           </h1>
           <p className="hero-sub">
             Bộ sưu tập những khu nghỉ dưỡng tinh tuyển dành riêng cho hành trình
@@ -149,7 +156,9 @@ export default function HomePage() {
         <div className="section-head">
           <Reveal>
             <p className="section-eyebrow">Bộ sưu tập</p>
-            <h2 className="section-title">Curated Collections</h2>
+          </Reveal>
+          <RevealText as="h2" className="section-title" text="Curated Collections" />
+          <Reveal delay={140}>
             <p className="section-desc">
               Những khu nghỉ dưỡng được tuyển chọn cho gu thẩm mỹ tinh tế nhất.
             </p>
@@ -186,8 +195,8 @@ export default function HomePage() {
         <div className="section-head">
           <Reveal>
             <p className="section-eyebrow">Phòng nghỉ</p>
-            <h2 className="section-title">Không gian được yêu thích</h2>
           </Reveal>
+          <RevealText as="h2" className="section-title" text="Không gian được yêu thích" />
         </div>
 
         <div className="room-grid">
@@ -228,8 +237,8 @@ export default function HomePage() {
         <div className="beyond-content">
           <Reveal>
             <p className="section-eyebrow light">Hơn cả một kỳ nghỉ</p>
-            <h2 className="section-title light">Beyond the Stay</h2>
           </Reveal>
+          <RevealText as="h2" className="section-title light" text="Beyond the Stay" />
           <div className="beyond-list">
             {EXPERIENCES.map((ex, i) => (
               <Reveal key={ex.title} className="beyond-item" delay={i * 140}>
@@ -249,8 +258,8 @@ export default function HomePage() {
         <div className="section-head">
           <Reveal>
             <p className="section-eyebrow">Cảm nhận</p>
-            <h2 className="section-title">Traveler's Narrative</h2>
           </Reveal>
+          <RevealText as="h2" className="section-title" text="Traveler's Narrative" />
         </div>
 
         <div className="narrative-grid">
@@ -274,7 +283,7 @@ export default function HomePage() {
       <section className="cta">
         <div className="cta-overlay" />
         <Reveal className="cta-content">
-          <h2>Bắt đầu hành trình của bạn</h2>
+          <RevealText as="h2" text="Bắt đầu hành trình của bạn" />
           <p>Đặt phòng hôm nay để tận hưởng đặc quyền dành riêng cho thành viên.</p>
           <button className="cta-btn" onClick={() => navigate('/register')}>
             Tạo tài khoản
