@@ -14,6 +14,7 @@ import ManagerHotels from './pages/manager/ManagerHotels'
 import ManagerRooms from './pages/manager/ManagerRooms'
 import ManagerServices from './pages/manager/ManagerServices'
 import ManagerPricing from './pages/manager/ManagerPricing'
+import ManagerVouchers from './pages/manager/ManagerVouchers'
 import ManagerBookings from './pages/manager/ManagerBookings'
 import ManagerRevenue from './pages/manager/ManagerRevenue'
 
@@ -62,6 +63,7 @@ function App() {
         <Route path="rooms" element={<ManagerRooms />} />
         <Route path="services" element={<ManagerServices />} />
         <Route path="pricing" element={<ManagerPricing />} />
+        <Route path="vouchers" element={<ManagerVouchers />} />
         <Route path="bookings" element={<ManagerBookings />} />
         <Route path="revenue" element={<ManagerRevenue />} />
       </Route>

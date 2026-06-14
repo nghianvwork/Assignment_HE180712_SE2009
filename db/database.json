@@ -306,6 +306,34 @@
       "price": 6000000
     }
   ],
+  "vouchers": [
+    {
+      "id": "1",
+      "hotelId": "1",
+      "code": "SUMMER10",
+      "description": "Giảm 10% cho kỳ nghỉ hè",
+      "discountType": "percent",
+      "discountValue": 10,
+      "startDate": "2026-06-01",
+      "endDate": "2026-08-31",
+      "maxUses": 100,
+      "used": 12,
+      "active": true
+    },
+    {
+      "id": "2",
+      "hotelId": "2",
+      "code": "SAIGON200K",
+      "description": "Giảm 200.000đ cho đơn từ 2 đêm",
+      "discountType": "amount",
+      "discountValue": 200000,
+      "startDate": "2026-06-01",
+      "endDate": "2026-12-31",
+      "maxUses": 50,
+      "used": 3,
+      "active": true
+    }
+  ],
   "bookings": [
     {
       "id": "1",
