@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
+import { Modal } from 'react-bootstrap'
 import { toast } from 'react-toastify'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
@@ -33,7 +34,7 @@ export default function HotelDetailPage() {
   const [mainImg, setMainImg] = useState('')
   const [activeRoom, setActiveRoom] = useState(null)
   const [favId, setFavId] = useState(null)
-  const [showRooms, setShowRooms] = useState(false)
+  const [roomsOpen, setRoomsOpen] = useState(false)
 
   useEffect(() => {
     let active = true
@@ -107,6 +108,7 @@ export default function HotelDetailPage() {
       return navigate('/login')
     }
     if (user.role !== 'user') return toast.info('Tài khoản quản trị/quản lý không dùng để đặt phòng')
+    setRoomsOpen(false)
     setActiveRoom(room)
   }
 
@@ -234,44 +236,65 @@ export default function HotelDetailPage() {
 
           <aside className="hd-rooms">
             <h2>Phòng &amp; giá</h2>
-            {!showRooms ? (
-              <button className="hd-show-rooms" onClick={() => setShowRooms(true)}>
-                Xem các phòng ({rooms.length})
-              </button>
-            ) : (
-              <>
-                {rooms.map((room) => (
-              <article key={room.id} className="hd-room">
-                <img src={room.image} alt={room.name} loading="lazy" />
-                <div className="hd-room-body">
-                  <span className="hd-room-type">{room.type}</span>
-                  <h3>{room.name}</h3>
-                  <p className="hd-room-meta">
-                    {room.bedType} · {room.capacity} khách · {room.size}m²
-                  </p>
-                  <div className="hd-room-foot">
-                    <span className="hd-room-price">
-                      {formatVND(room.price)} <small>/ đêm</small>
-                    </span>
-                    <button
-                      className="hd-book-btn"
-                      disabled={!room.available}
-                      onClick={() => openBooking(room)}
-                    >
-                      {room.available ? 'Đặt phòng' : 'Hết phòng'}
-                    </button>
-                  </div>
-                </div>
-              </article>
-            ))}
-                {!rooms.length && <p className="text-muted">Chưa có phòng.</p>}
-              </>
-            )}
+            <p className="hd-rooms-from">
+              {rooms.length ? (
+                <>
+                  Chỉ từ <strong>{formatVND(Math.min(...rooms.map((r) => r.price)))}</strong> / đêm
+                </>
+              ) : (
+                'Chưa cập nhật phòng'
+              )}
+            </p>
+            <button
+              className="hd-show-rooms"
+              onClick={() => setRoomsOpen(true)}
+              disabled={!rooms.length}
+            >
+              {rooms.length ? `Xem các phòng (${rooms.length})` : 'Chưa có phòng'}
+            </button>
           </aside>
         </div>
       </div>
 
       <Footer />
+
+      {/* Danh sách phòng hiển thị dạng popup */}
+      <Modal show={roomsOpen} onHide={() => setRoomsOpen(false)} centered size="lg" scrollable>
+        <Modal.Header closeButton>
+          <Modal.Title className="fs-5">Phòng tại {hotel.name}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div className="hd-room-list">
+            {rooms.map((room) => (
+              <article key={room.id} className="hd-room-row">
+                <img src={room.image} alt={room.name} loading="lazy" />
+                <div className="hd-room-row-body">
+                  <span className="hd-room-type">{room.type}</span>
+                  <h3>{room.name}</h3>
+                  <p className="hd-room-meta">
+                    {room.bedType} · {room.capacity} khách · {room.size}m²
+                  </p>
+                </div>
+                <div className="hd-room-row-cta">
+                  <span className="hd-room-price">
+                    {formatVND(room.price)} <small>/ đêm</small>
+                  </span>
+                  <button
+                    className="hd-book-btn"
+                    disabled={!room.available}
+                    onClick={() => openBooking(room)}
+                  >
+                    {room.available ? 'Đặt phòng' : 'Hết phòng'}
+                  </button>
+                </div>
+              </article>
+            ))}
+            {!rooms.length && (
+              <p className="text-muted text-center py-3">Chưa có phòng.</p>
+            )}
+          </div>
+        </Modal.Body>
+      </Modal>
 
       <BookingModal
         show={!!activeRoom}

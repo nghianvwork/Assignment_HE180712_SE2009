@@ -275,6 +275,73 @@
   color: var(--c-ink);
   margin: 0 0 16px;
 }
+.hd-rooms-from {
+  font-size: 14px;
+  color: var(--c-muted);
+  margin: 0 0 12px;
+}
+.hd-rooms-from strong {
+  font-family: var(--font-display);
+  font-size: 20px;
+  color: var(--c-ink);
+}
+
+/* Danh sách phòng trong popup */
+.hd-room-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.hd-room-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  border: 1px solid #efece6;
+  border-radius: 10px;
+  padding: 12px;
+  transition: border-color 0.3s var(--ease-lux), box-shadow 0.3s var(--ease-lux);
+}
+.hd-room-row:hover {
+  border-color: var(--c-gold-soft);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+}
+.hd-room-row > img {
+  width: 120px;
+  height: 88px;
+  flex-shrink: 0;
+  object-fit: cover;
+  border-radius: 8px;
+}
+.hd-room-row-body {
+  flex: 1;
+  min-width: 0;
+}
+.hd-room-row-body h3 {
+  font-family: var(--font-display);
+  font-size: 18px;
+  margin: 4px 0 6px;
+  color: var(--c-ink);
+}
+.hd-room-row-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+@media (max-width: 540px) {
+  .hd-room-row {
+    flex-wrap: wrap;
+  }
+  .hd-room-row-cta {
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
 .hd-show-rooms {
   width: 100%;
   padding: 14px 20px;
