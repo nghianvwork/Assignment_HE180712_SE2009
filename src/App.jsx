@@ -7,6 +7,7 @@ import MyBookingsPage from './pages/MyBookingsPage'
 import WishlistPage from './pages/WishlistPage'
 import ProfilePage from './pages/ProfilePage'
 import LoginPage from './pages/LoginPage'
+import ForgotPasswordPage from './pages/ForgotPasswordPage'
 import RegisterPage from './pages/RegisterPage'
 import ProtectedRoute from './components/ProtectedRoute'
 import AdminLayout from './pages/admin/AdminLayout'
@@ -42,6 +43,7 @@ function App() {
       <Route path="/hotels" element={<HotelsPage />} />
       <Route path="/hotels/:id" element={<HotelDetailPage />} />
       <Route path="/login" element={<LoginPage />} />
+      <Route path="/forgot-password" element={<ForgotPasswordPage />} />
       <Route path="/register" element={<RegisterPage />} />
 
       {/* Khu vực khách hàng — cần đăng nhập */}
