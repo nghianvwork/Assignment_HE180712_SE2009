@@ -70,7 +70,9 @@ Xây dựng một nền tảng đặt phòng khách sạn nhiều chi nhánh (mu
 - `rooms.hotelId` / `services.hotelId` → `hotels.id`
 - `bookings.userId` → `users.id`, `bookings.roomId` → `rooms.id`, `bookings.serviceIds[]` → `services.id`
 
-**Trạng thái booking:** `pending` → `confirmed` → `cancelled`
+**Trạng thái booking:** `pending` → `confirmed` → `checked_in` → `checked_out`
+- `pending` → `rejected` (manager từ chối) · `pending`/`confirmed` → `cancelled` (hủy / hoàn tiền)
+- Yêu cầu hoàn tiền: `booking.cancelRequest` + `booking.refundStatus` (`requested` → `refunded` / `denied`)
 
 ---
 

@@ -4,6 +4,7 @@ import { toast } from 'react-toastify'
 import { getBookings } from '../../services/bookingService'
 import { formatVND } from '../../utils/format'
 import { monthlyRevenue, weeklyRevenue, totalRevenue } from '../../utils/revenueStats'
+import { REVENUE_STATUSES } from '../../utils/bookingStatus'
 import BarChart from '../../components/BarChart'
 import { useOwnedHotels } from './useOwnedHotels'
 
@@ -28,12 +29,12 @@ export default function ManagerRevenue() {
   // Doanh thu (đã xác nhận) theo từng khách sạn
   const byHotel = hotels.map((h) => {
     const value = bookings
-      .filter((b) => b.hotelId === h.id && b.status === 'confirmed')
+      .filter((b) => b.hotelId === h.id && REVENUE_STATUSES.includes(b.status))
       .reduce((sum, b) => sum + (b.totalPrice || 0), 0)
     return { id: h.id, name: h.name, value }
   })
 
-  const confirmedCount = bookings.filter((b) => b.status === 'confirmed').length
+  const confirmedCount = bookings.filter((b) => REVENUE_STATUSES.includes(b.status)).length
   const stats = [
     { label: 'Tổng doanh thu', value: formatVND(total) },
     { label: 'Booking đã xác nhận', value: confirmedCount },
