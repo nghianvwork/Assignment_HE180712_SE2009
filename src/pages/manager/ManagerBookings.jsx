@@ -49,7 +49,7 @@ export default function ManagerBookings() {
   }
 
   const handleCancel = async () => {
-    await patch(cancelling, { status: 'cancelled' }, `Đã hủy đặt phòng #${cancelling.id}`)
+    await patch(cancelling, { status: 'cancelled' }, 'Đã hủy đặt phòng')
     setCancelling(null)
   }
 
@@ -100,7 +100,6 @@ export default function ManagerBookings() {
         <Table className="admin-table" responsive>
           <thead>
             <tr>
-              <th>#</th>
               <th>Phòng</th>
               <th>Khách hàng</th>
               <th>Nhận / Trả phòng</th>
@@ -117,7 +116,6 @@ export default function ManagerBookings() {
               const refundPending = b.cancelRequest && b.refundStatus === 'requested'
               return (
                 <tr key={b.id}>
-                  <td>{b.id}</td>
                   <td>
                     <strong>{roomById[b.roomId]?.name || '—'}</strong>
                     <div className="text-muted small">{roomById[b.roomId]?.type}</div>
@@ -150,7 +148,7 @@ export default function ManagerBookings() {
                             patch(
                               b,
                               { status: 'cancelled', refundStatus: 'refunded' },
-                              `Đã hoàn tiền & hủy #${b.id}`
+                              'Đã hoàn tiền & hủy đặt phòng'
                             )
                           }
                         >
@@ -160,7 +158,7 @@ export default function ManagerBookings() {
                           size="sm"
                           variant="outline-secondary"
                           onClick={() =>
-                            patch(b, { refundStatus: 'denied' }, `Đã từ chối hoàn tiền #${b.id}`)
+                            patch(b, { refundStatus: 'denied' }, 'Đã từ chối hoàn tiền')
                           }
                         >
                           Từ chối hoàn
@@ -175,7 +173,7 @@ export default function ManagerBookings() {
                               variant="outline-success"
                               className="me-2"
                               onClick={() =>
-                                patch(b, { status: 'confirmed' }, `Đã xác nhận #${b.id}`)
+                                patch(b, { status: 'confirmed' }, 'Đã xác nhận đặt phòng')
                               }
                             >
                               Xác nhận
@@ -184,7 +182,7 @@ export default function ManagerBookings() {
                               size="sm"
                               variant="outline-danger"
                               onClick={() =>
-                                patch(b, { status: 'rejected' }, `Đã từ chối #${b.id}`)
+                                patch(b, { status: 'rejected' }, 'Đã từ chối đặt phòng')
                               }
                             >
                               Từ chối
@@ -198,7 +196,7 @@ export default function ManagerBookings() {
                               variant="outline-primary"
                               className="me-2"
                               onClick={() =>
-                                patch(b, { status: 'checked_in' }, `Đã nhận phòng #${b.id}`)
+                                patch(b, { status: 'checked_in' }, 'Đã nhận phòng')
                               }
                             >
                               Check-in
@@ -217,7 +215,7 @@ export default function ManagerBookings() {
                             size="sm"
                             variant="outline-secondary"
                             onClick={() =>
-                              patch(b, { status: 'checked_out' }, `Đã trả phòng #${b.id}`)
+                              patch(b, { status: 'checked_out' }, 'Đã trả phòng')
                             }
                           >
                             Check-out
@@ -231,7 +229,7 @@ export default function ManagerBookings() {
             })}
             {!sorted.length && (
               <tr>
-                <td colSpan={7} className="text-center text-muted py-4">
+                <td colSpan={6} className="text-center text-muted py-4">
                   Không có đặt phòng nào.
                 </td>
               </tr>
@@ -243,9 +241,9 @@ export default function ManagerBookings() {
       <ConfirmModal
         show={!!cancelling}
         title="Hủy đặt phòng"
-        message={`Hủy đặt phòng #${cancelling?.id} của khách "${
+        message={`Hủy đặt phòng của khách "${
           userById[cancelling?.userId]?.fullName || ''
-        }"?`}
+        }" — phòng ${roomById[cancelling?.roomId]?.name || ''}?`}
         confirmLabel="Hủy đặt phòng"
         onConfirm={handleCancel}
         onHide={() => setCancelling(null)}

@@ -45,7 +45,7 @@ export default function MyBookingsPage() {
   const cancel = async () => {
     try {
       await updateBooking(cancelling.id, { status: 'cancelled' })
-      toast.success(`Đã hủy đặt phòng #${cancelling.id}`)
+      toast.success('Đã hủy đặt phòng')
       setCancelling(null)
       reload()
     } catch {
@@ -149,7 +149,7 @@ export default function MyBookingsPage() {
       <ConfirmModal
         show={!!cancelling}
         title="Hủy đặt phòng"
-        message={`Hủy đặt phòng #${cancelling?.id}? Hành động này không thể hoàn tác.`}
+        message={`Hủy đặt phòng tại "${hotelById[cancelling?.hotelId]?.name || ''}"? Hành động này không thể hoàn tác.`}
         confirmLabel="Hủy đặt phòng"
         onConfirm={cancel}
         onHide={() => setCancelling(null)}
