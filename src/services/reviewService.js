@@ -1,7 +1,8 @@
 import axiosClient from './axiosClient'
+import { applyFilter } from './clientFilter'
 
 export function getReviews(params) {
-  return axiosClient.get('/reviews', { params })
+  return axiosClient.get('/reviews').then((rows) => applyFilter(rows, params))
 }
 
 export function createReview(data) {

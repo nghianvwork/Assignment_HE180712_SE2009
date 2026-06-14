@@ -1,7 +1,8 @@
 import axiosClient from './axiosClient'
+import { applyFilter } from './clientFilter'
 
 export function getWishlist(params) {
-  return axiosClient.get('/wishlist', { params })
+  return axiosClient.get('/wishlist').then((rows) => applyFilter(rows, params))
 }
 
 export function addToWishlist(data) {

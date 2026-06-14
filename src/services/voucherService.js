@@ -1,7 +1,8 @@
 import axiosClient from './axiosClient'
+import { applyFilter } from './clientFilter'
 
 export function getVouchers(params) {
-  return axiosClient.get('/vouchers', { params })
+  return axiosClient.get('/vouchers').then((rows) => applyFilter(rows, params))
 }
 
 export function createVoucher(data) {

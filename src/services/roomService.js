@@ -1,7 +1,8 @@
 import axiosClient from './axiosClient'
+import { applyFilter } from './clientFilter'
 
 export function getRooms(params) {
-  return axiosClient.get('/rooms', { params })
+  return axiosClient.get('/rooms').then((rows) => applyFilter(rows, params))
 }
 
 export function getRoomById(id) {

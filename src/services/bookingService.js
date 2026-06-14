@@ -1,7 +1,8 @@
 import axiosClient from './axiosClient'
+import { applyFilter } from './clientFilter'
 
 export function getBookings(params) {
-  return axiosClient.get('/bookings', { params })
+  return axiosClient.get('/bookings').then((rows) => applyFilter(rows, params))
 }
 
 export function createBooking(data) {

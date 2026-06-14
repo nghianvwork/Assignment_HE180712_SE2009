@@ -1,7 +1,8 @@
 import axiosClient from './axiosClient'
+import { applyFilter } from './clientFilter'
 
 export function getPricingRules(params) {
-  return axiosClient.get('/pricingRules', { params })
+  return axiosClient.get('/pricingRules').then((rows) => applyFilter(rows, params))
 }
 
 export function createPricingRule(data) {

@@ -1,7 +1,8 @@
 import axiosClient from './axiosClient'
+import { applyFilter } from './clientFilter'
 
 export function getServices(params) {
-  return axiosClient.get('/services', { params })
+  return axiosClient.get('/services').then((rows) => applyFilter(rows, params))
 }
 
 export function createService(data) {

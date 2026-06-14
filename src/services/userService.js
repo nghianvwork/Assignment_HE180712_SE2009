@@ -1,7 +1,8 @@
 import axiosClient from './axiosClient'
+import { applyFilter } from './clientFilter'
 
 export function getUsers(params) {
-  return axiosClient.get('/users', { params })
+  return axiosClient.get('/users').then((rows) => applyFilter(rows, params))
 }
 
 export function createUser(data) {
