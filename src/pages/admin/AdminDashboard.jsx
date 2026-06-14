@@ -1,34 +1,23 @@
 import { useEffect, useState } from 'react'
-import { Table } from 'react-bootstrap'
 import { toast } from 'react-toastify'
 import { getUsers } from '../../services/userService'
 import { getHotels } from '../../services/hotelService'
-import { getRooms } from '../../services/roomService'
-import { getServices } from '../../services/serviceService'
-import { getBookings } from '../../services/bookingService'
-import { formatVND } from '../../utils/format'
+import BarChart from '../../components/BarChart'
 
-const STATUS_BADGE = {
-  pending: { cls: 'amber', label: 'Chờ duyệt' },
-  confirmed: { cls: 'green', label: 'Đã xác nhận' },
-  cancelled: { cls: 'red', label: 'Đã hủy' },
-}
+const ROLE_LABEL = { user: 'Khách hàng', manager: 'Quản lý', admin: 'Quản trị' }
 
-/** Tổng quan hệ thống: số liệu + 5 booking mới nhất */
+/** Tổng quan hệ thống cho admin: số liệu + biểu đồ người dùng & khách sạn */
 export default function AdminDashboard() {
-  const [data, setData] = useState({
-    users: [],
-    hotels: [],
-    rooms: [],
-    services: [],
-    bookings: [],
-  })
+  const [users, setUsers] = useState([])
+  const [hotels, setHotels] = useState([])
 
   useEffect(() => {
     let active = true
-    Promise.all([getUsers(), getHotels(), getRooms(), getServices(), getBookings()])
-      .then(([users, hotels, rooms, services, bookings]) => {
-        if (active) setData({ users, hotels, rooms, services, bookings })
+    Promise.all([getUsers(), getHotels()])
+      .then(([u, h]) => {
+        if (!active) return
+        setUsers(u)
+        setHotels(h)
       })
       .catch(() => toast.error('Không tải được dữ liệu hệ thống'))
     return () => {
@@ -36,33 +25,36 @@ export default function AdminDashboard() {
     }
   }, [])
 
-  const { users, hotels, rooms, services, bookings } = data
-  const revenue = bookings
-    .filter((b) => b.status === 'confirmed')
-    .reduce((sum, b) => sum + (b.totalPrice || 0), 0)
-  const pendingCount = bookings.filter((b) => b.status === 'pending').length
-
-  const userById = Object.fromEntries(users.map((u) => [u.id, u]))
-  const hotelById = Object.fromEntries(hotels.map((h) => [h.id, h]))
-  const recent = [...bookings]
-    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-    .slice(0, 5)
+  const managerCount = users.filter((u) => u.role === 'manager').length
+  const activeHotels = hotels.filter((h) => h.status === 'active').length
 
   const stats = [
-    { label: 'Người dùng', value: users.length, sub: `${users.filter((u) => u.role === 'manager').length} quản lý` },
-    { label: 'Khách sạn', value: hotels.length, sub: `${hotels.filter((h) => h.status === 'active').length} đang hoạt động` },
-    { label: 'Phòng', value: rooms.length, sub: `${rooms.filter((r) => r.available).length} còn trống` },
-    { label: 'Dịch vụ', value: services.length },
-    { label: 'Đặt phòng', value: bookings.length, sub: `${pendingCount} chờ duyệt` },
-    { label: 'Doanh thu (đã xác nhận)', value: formatVND(revenue) },
+    { label: 'Người dùng', value: users.length, sub: `${users.filter((u) => u.role === 'user').length} khách hàng` },
+    { label: 'Quản lý khách sạn', value: managerCount },
+    { label: 'Khách sạn', value: hotels.length, sub: `${activeHotels} đang hoạt động` },
+    { label: 'Tài khoản bị khóa', value: users.filter((u) => u.status === 'banned').length },
   ]
+
+  // Biểu đồ người dùng theo vai trò
+  const usersByRole = ['user', 'manager', 'admin'].map((role) => ({
+    label: ROLE_LABEL[role],
+    value: users.filter((u) => u.role === role).length,
+  }))
+
+  // Biểu đồ khách sạn theo thành phố
+  const cityMap = {}
+  hotels.forEach((h) => {
+    const city = h.city || 'Khác'
+    cityMap[city] = (cityMap[city] || 0) + 1
+  })
+  const hotelsByCity = Object.entries(cityMap).map(([label, value]) => ({ label, value }))
 
   return (
     <>
       <div className="admin-head">
         <h1 className="admin-title">
           Tổng quan
-          <small>Toàn cảnh hoạt động của hệ thống Hotel Luxury</small>
+          <small>Quản trị người dùng &amp; khách sạn — Hotel Luxury</small>
         </h1>
       </div>
 
@@ -76,44 +68,17 @@ export default function AdminDashboard() {
         ))}
       </div>
 
-      <h2 className="admin-section-title">Đặt phòng gần đây</h2>
-      <div className="admin-card">
-        <Table className="admin-table" responsive>
-          <thead>
-            <tr>
-              <th>Khách hàng</th>
-              <th>Khách sạn</th>
-              <th>Nhận / Trả phòng</th>
-              <th>Tổng tiền</th>
-              <th>Trạng thái</th>
-            </tr>
-          </thead>
-          <tbody>
-            {recent.map((b) => {
-              const badge = STATUS_BADGE[b.status] || STATUS_BADGE.pending
-              return (
-                <tr key={b.id}>
-                  <td>{userById[b.userId]?.fullName || '—'}</td>
-                  <td>{hotelById[b.hotelId]?.name || '—'}</td>
-                  <td>
-                    {b.checkIn} → {b.checkOut}
-                  </td>
-                  <td>{formatVND(b.totalPrice)}</td>
-                  <td>
-                    <span className={`badge-soft ${badge.cls}`}>{badge.label}</span>
-                  </td>
-                </tr>
-              )
-            })}
-            {!recent.length && (
-              <tr>
-                <td colSpan={5} className="text-center text-muted py-4">
-                  Chưa có đặt phòng nào.
-                </td>
-              </tr>
-            )}
-          </tbody>
-        </Table>
+      <div className="chart-grid">
+        <div className="chart-card">
+          <h3>Người dùng theo vai trò</h3>
+          <div className="chart-sub">Phân bố tài khoản trong hệ thống</div>
+          <BarChart data={usersByRole} color="var(--c-gold, #9c7a4d)" />
+        </div>
+        <div className="chart-card">
+          <h3>Khách sạn theo thành phố</h3>
+          <div className="chart-sub">Số khách sạn tại mỗi thành phố</div>
+          <BarChart data={hotelsByCity} color="var(--c-dark, #2b2b2b)" />
+        </div>
       </div>
     </>
   )

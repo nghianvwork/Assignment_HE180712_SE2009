@@ -4,10 +4,10 @@ import { useAuth } from '../context/AuthContext'
 import './Navbar.css'
 
 const NAV_LINKS = [
-  { label: 'Bộ sưu tập', href: '#collections' },
-  { label: 'Phòng nghỉ', href: '#rooms' },
-  { label: 'Trải nghiệm', href: '#beyond' },
-  { label: 'Cảm nhận', href: '#narrative' },
+  { label: 'Trang chủ', href: '/' },
+  { label: 'Khách sạn', href: '/hotels' },
+  { label: 'Khám phá', href: '#beyond' },
+  { label: 'Cảm nhận ', href: '#narrative' },
 ]
 
 export default function Navbar() {

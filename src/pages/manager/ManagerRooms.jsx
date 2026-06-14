@@ -2,10 +2,10 @@ import { useEffect, useState } from 'react'
 import { Table, Form, Button, Modal, Row, Col } from 'react-bootstrap'
 import { toast } from 'react-toastify'
 import { getRooms, createRoom, updateRoom, deleteRoom } from '../../services/roomService'
-import { getHotels } from '../../services/hotelService'
 import { formatVND } from '../../utils/format'
 import ConfirmModal from '../../components/ConfirmModal'
 import FormField from '../../components/FormField'
+import { useOwnedHotels } from './useOwnedHotels'
 
 const ROOM_TYPES = ['Standard', 'Superior', 'Deluxe', 'Suite']
 
@@ -23,37 +23,44 @@ const EMPTY = {
   amenities: '',
 }
 
-/** Quản lý toàn bộ phòng: lọc theo khách sạn + CRUD */
-export default function AdminRooms() {
+/** Quản lý phòng — chỉ trong các khách sạn manager sở hữu */
+export default function ManagerRooms() {
+  const { hotels, hotelIds, loading } = useOwnedHotels()
   const [rooms, setRooms] = useState([])
-  const [hotels, setHotels] = useState([])
   const [hotelFilter, setHotelFilter] = useState('')
   const [editing, setEditing] = useState(null)
   const [deleting, setDeleting] = useState(null)
 
-  const reload = () =>
-    getRooms()
-      .then(setRooms)
+  const reload = () => {
+    const ids = new Set(hotelIds)
+    return getRooms()
+      .then((all) => setRooms(all.filter((r) => ids.has(r.hotelId))))
       .catch(() => toast.error('Không tải được danh sách phòng'))
+  }
 
   useEffect(() => {
-    reload()
-    getHotels().then(setHotels).catch(() => {})
-  }, [])
+    if (!loading) reload()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loading, hotels])
 
   const set = (key, value) => setEditing((f) => ({ ...f, [key]: value }))
   const hotelName = (id) => hotels.find((h) => h.id === id)?.name || '—'
 
-  // Mở form: amenities array -> chuỗi phân tách bằng dấu phẩy để dễ nhập
+  // Mở form: amenities array -> chuỗi phân tách bằng dấu phẩy; mặc định hotel đầu tiên
   const openForm = (room) =>
     setEditing(
       room
         ? { ...room, amenities: (room.amenities || []).join(', ') }
-        : { ...EMPTY }
+        : { ...EMPTY, hotelId: hotelIds[0] || '' }
     )
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    // Chặn lưu phòng vào khách sạn không thuộc quyền sở hữu
+    if (!hotelIds.includes(editing.hotelId)) {
+      toast.error('Bạn chỉ có thể thêm phòng cho khách sạn của mình')
+      return
+    }
     const payload = {
       ...editing,
       price: Number(editing.price) || 0,
@@ -97,23 +104,29 @@ export default function AdminRooms() {
       <div className="admin-head">
         <h1 className="admin-title">
           Phòng
-          <small>{rooms.length} phòng trên toàn hệ thống</small>
+          <small>{rooms.length} phòng trong khách sạn của bạn</small>
         </h1>
-        <button className="admin-btn-primary" onClick={() => openForm(null)}>
+        <button
+          className="admin-btn-primary"
+          onClick={() => openForm(null)}
+          disabled={!hotels.length}
+        >
           + Thêm phòng
         </button>
       </div>
 
-      <div className="admin-filters">
-        <Form.Select value={hotelFilter} onChange={(e) => setHotelFilter(e.target.value)}>
-          <option value="">Mọi khách sạn</option>
-          {hotels.map((h) => (
-            <option key={h.id} value={h.id}>
-              {h.name}
-            </option>
-          ))}
-        </Form.Select>
-      </div>
+      {hotels.length > 1 && (
+        <div className="admin-filters">
+          <Form.Select value={hotelFilter} onChange={(e) => setHotelFilter(e.target.value)}>
+            <option value="">Mọi khách sạn của tôi</option>
+            {hotels.map((h) => (
+              <option key={h.id} value={h.id}>
+                {h.name}
+              </option>
+            ))}
+          </Form.Select>
+        </div>
+      )}
 
       <div className="admin-card">
         <Table className="admin-table" responsive>
