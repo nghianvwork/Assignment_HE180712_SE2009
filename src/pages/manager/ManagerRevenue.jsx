@@ -2,31 +2,47 @@ import { useEffect, useState } from 'react'
 import { Table } from 'react-bootstrap'
 import { toast } from 'react-toastify'
 import { getBookings } from '../../services/bookingService'
+import { getRooms } from '../../services/roomService'
 import { formatVND } from '../../utils/format'
 import { monthlyRevenue, weeklyRevenue, totalRevenue } from '../../utils/revenueStats'
+import { occupancyRate, monthlyBookingCount } from '../../utils/reportStats'
 import { REVENUE_STATUSES } from '../../utils/bookingStatus'
 import BarChart from '../../components/BarChart'
 import { useOwnedHotels } from './useOwnedHotels'
 
-/** Doanh thu khu quản lý: biểu đồ theo tháng & theo tuần + bảng theo khách sạn */
+// Ngày hôm nay dạng YYYY-MM-DD theo giờ địa phương
+function todayStr() {
+  const d = new Date()
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(
+    d.getDate()
+  ).padStart(2, '0')}`
+}
+
+/** Báo cáo khu quản lý: doanh thu, tỉ lệ lấp đầy, booking theo thời gian */
 export default function ManagerRevenue() {
   const { hotels, hotelIds, loading } = useOwnedHotels()
   const [bookings, setBookings] = useState([])
+  const [rooms, setRooms] = useState([])
 
   useEffect(() => {
     if (loading) return
     const ids = new Set(hotelIds)
     getBookings()
       .then((all) => setBookings(all.filter((b) => ids.has(b.hotelId))))
-      .catch(() => toast.error('Không tải được dữ liệu doanh thu'))
+      .catch(() => toast.error('Không tải được dữ liệu báo cáo'))
+    getRooms()
+      .then((all) => setRooms(all.filter((r) => ids.has(r.hotelId))))
+      .catch(() => {})
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [loading, hotels])
 
   const monthData = monthlyRevenue(bookings, 6)
   const weekData = weeklyRevenue(bookings, 6)
+  const bookingTrend = monthlyBookingCount(bookings, 6)
   const total = totalRevenue(bookings)
+  const occupancy = occupancyRate(rooms, bookings, todayStr())
 
-  // Doanh thu (đã xác nhận) theo từng khách sạn
+  // Doanh thu theo từng khách sạn
   const byHotel = hotels.map((h) => {
     const value = bookings
       .filter((b) => b.hotelId === h.id && REVENUE_STATUSES.includes(b.status))
@@ -39,14 +55,15 @@ export default function ManagerRevenue() {
     { label: 'Tổng doanh thu', value: formatVND(total) },
     { label: 'Booking đã xác nhận', value: confirmedCount },
     { label: 'Doanh thu tháng này', value: formatVND(monthData[monthData.length - 1]?.value || 0) },
+    { label: 'Tỉ lệ lấp đầy hôm nay', value: `${occupancy}%` },
   ]
 
   return (
     <>
       <div className="admin-head">
         <h1 className="admin-title">
-          Doanh thu
-          <small>Thống kê doanh thu từ các booking đã xác nhận</small>
+          Báo cáo
+          <small>Doanh thu, tỉ lệ lấp đầy và lượng booking theo thời gian</small>
         </h1>
       </div>
 
@@ -70,6 +87,11 @@ export default function ManagerRevenue() {
           <div className="chart-sub">6 tuần gần nhất (mốc đầu tuần)</div>
           <BarChart data={weekData} formatValue={formatVND} color="var(--c-dark, #2b2b2b)" />
         </div>
+        <div className="chart-card">
+          <h3>Lượng booking theo tháng</h3>
+          <div className="chart-sub">Số lượt đặt phòng 6 tháng gần nhất</div>
+          <BarChart data={bookingTrend} color="var(--c-gold, #9c7a4d)" />
+        </div>
       </div>
 
       <h2 className="admin-section-title">Doanh thu theo khách sạn</h2>
@@ -78,7 +100,7 @@ export default function ManagerRevenue() {
           <thead>
             <tr>
               <th>Khách sạn</th>
-              <th className="text-end">Doanh thu (đã xác nhận)</th>
+              <th className="text-end">Doanh thu</th>
             </tr>
           </thead>
           <tbody>

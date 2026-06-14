@@ -10,7 +10,7 @@ const MENU = [
   { to: '/manager/pricing', label: 'Giá theo mùa', icon: '🏷' },
   { to: '/manager/vouchers', label: 'Khuyến mãi', icon: '🎟' },
   { to: '/manager/bookings', label: 'Đặt phòng', icon: '📑' },
-  { to: '/manager/revenue', label: 'Doanh thu', icon: '📊' },
+  { to: '/manager/revenue', label: 'Báo cáo', icon: '📊' },
 ]
 
 /** Khung khu quản lý khách sạn: sidebar điều hướng + vùng nội dung (Outlet) */
