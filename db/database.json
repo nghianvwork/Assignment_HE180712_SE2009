@@ -316,6 +316,38 @@
       "totalPrice": 2100000,
       "status": "pending",
       "createdAt": "2026-06-02T08:15:00.000Z"
+    },
+    {
+      "id": "3",
+      "userId": "5",
+      "hotelId": "1",
+      "roomId": "2",
+      "serviceIds": [],
+      "checkIn": "2026-06-20",
+      "checkOut": "2026-06-22",
+      "guests": 2,
+      "nights": 2,
+      "totalPrice": 10000000,
+      "status": "confirmed",
+      "cancelRequest": true,
+      "refundStatus": "requested",
+      "createdAt": "2026-06-05T09:00:00.000Z"
+    },
+    {
+      "id": "4",
+      "userId": "4",
+      "hotelId": "2",
+      "roomId": "4",
+      "serviceIds": [
+        "3"
+      ],
+      "checkIn": "2026-06-05",
+      "checkOut": "2026-06-07",
+      "guests": 2,
+      "nights": 2,
+      "totalPrice": 2100000,
+      "status": "checked_out",
+      "createdAt": "2026-06-03T11:00:00.000Z"
     }
   ],
   "$schema": "./node_modules/json-server/schema.json"

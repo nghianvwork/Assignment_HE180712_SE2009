@@ -5,22 +5,19 @@ import { getBookings, updateBooking } from '../../services/bookingService'
 import { getUsers } from '../../services/userService'
 import { getRooms } from '../../services/roomService'
 import { formatVND } from '../../utils/format'
+import { BOOKING_STATUS, REFUND_STATUS } from '../../utils/bookingStatus'
 import ConfirmModal from '../../components/ConfirmModal'
 import { useOwnedHotels } from './useOwnedHotels'
 
-const STATUS = {
-  pending: { cls: 'amber', label: 'Chờ duyệt' },
-  confirmed: { cls: 'green', label: 'Đã xác nhận' },
-  cancelled: { cls: 'red', label: 'Đã hủy' },
-}
-
-/** Đặt phòng của khách sạn manager sở hữu: xem khách theo từng phòng, duyệt / hủy */
+/** Đặt phòng của khách sạn manager sở hữu: vòng đời booking + xử lý hoàn tiền */
 export default function ManagerBookings() {
   const { hotels, hotelIds, loading } = useOwnedHotels()
   const [bookings, setBookings] = useState([])
   const [users, setUsers] = useState([])
   const [rooms, setRooms] = useState([])
   const [statusFilter, setStatusFilter] = useState('')
+  const [fromDate, setFromDate] = useState('')
+  const [toDate, setToDate] = useState('')
   const [cancelling, setCancelling] = useState(null)
 
   const reload = () => {
@@ -39,27 +36,30 @@ export default function ManagerBookings() {
   }, [loading, hotels])
 
   const userById = Object.fromEntries(users.map((u) => [u.id, u]))
-  const hotelById = Object.fromEntries(hotels.map((h) => [h.id, h]))
   const roomById = Object.fromEntries(rooms.map((r) => [r.id, r]))
 
-  const changeStatus = async (booking, status, successMsg) => {
+  const patch = async (booking, data, successMsg) => {
     try {
-      await updateBooking(booking.id, { status })
+      await updateBooking(booking.id, data)
       toast.success(successMsg)
       reload()
     } catch {
-      toast.error('Cập nhật trạng thái thất bại')
+      toast.error('Cập nhật thất bại')
     }
   }
 
   const handleCancel = async () => {
-    await changeStatus(cancelling, 'cancelled', `Đã hủy đặt phòng #${cancelling.id}`)
+    await patch(cancelling, { status: 'cancelled' }, `Đã hủy đặt phòng #${cancelling.id}`)
     setCancelling(null)
   }
 
-  const filtered = statusFilter
-    ? bookings.filter((b) => b.status === statusFilter)
-    : bookings
+  // Lọc theo trạng thái + khoảng ngày nhận phòng (checkIn)
+  const filtered = bookings.filter((b) => {
+    if (statusFilter && b.status !== statusFilter) return false
+    if (fromDate && b.checkIn < fromDate) return false
+    if (toDate && b.checkIn > toDate) return false
+    return true
+  })
   const sorted = [...filtered].sort(
     (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
   )
@@ -69,17 +69,31 @@ export default function ManagerBookings() {
       <div className="admin-head">
         <h1 className="admin-title">
           Đặt phòng
-          <small>{bookings.length} lượt đặt — khách theo từng phòng</small>
+          <small>{bookings.length} lượt đặt — duyệt, nhận/trả phòng, hoàn tiền</small>
         </h1>
       </div>
 
       <div className="admin-filters">
         <Form.Select value={statusFilter} onChange={(e) => setStatusFilter(e.target.value)}>
           <option value="">Mọi trạng thái</option>
-          <option value="pending">Chờ duyệt</option>
-          <option value="confirmed">Đã xác nhận</option>
-          <option value="cancelled">Đã hủy</option>
+          {Object.entries(BOOKING_STATUS).map(([key, s]) => (
+            <option key={key} value={key}>
+              {s.label}
+            </option>
+          ))}
         </Form.Select>
+        <Form.Control
+          type="date"
+          value={fromDate}
+          onChange={(e) => setFromDate(e.target.value)}
+          title="Nhận phòng từ ngày"
+        />
+        <Form.Control
+          type="date"
+          value={toDate}
+          onChange={(e) => setToDate(e.target.value)}
+          title="Nhận phòng đến ngày"
+        />
       </div>
 
       <div className="admin-card">
@@ -89,9 +103,7 @@ export default function ManagerBookings() {
               <th>#</th>
               <th>Phòng</th>
               <th>Khách hàng</th>
-              <th>Khách sạn</th>
               <th>Nhận / Trả phòng</th>
-              <th>Khách</th>
               <th>Tổng tiền</th>
               <th>Trạng thái</th>
               <th className="text-end">Thao tác</th>
@@ -99,8 +111,10 @@ export default function ManagerBookings() {
           </thead>
           <tbody>
             {sorted.map((b) => {
-              const badge = STATUS[b.status] || STATUS.pending
+              const badge = BOOKING_STATUS[b.status] || BOOKING_STATUS.pending
               const guest = userById[b.userId]
+              const refund = REFUND_STATUS[b.refundStatus]
+              const refundPending = b.cancelRequest && b.refundStatus === 'requested'
               return (
                 <tr key={b.id}>
                   <td>{b.id}</td>
@@ -112,37 +126,104 @@ export default function ManagerBookings() {
                     <strong>{guest?.fullName || '—'}</strong>
                     <div className="text-muted small">{guest?.phone || guest?.email}</div>
                   </td>
-                  <td>{hotelById[b.hotelId]?.name || '—'}</td>
                   <td>
                     {b.checkIn} → {b.checkOut}
-                    <div className="text-muted small">{b.nights} đêm</div>
+                    <div className="text-muted small">{b.nights} đêm · {b.guests} khách</div>
                   </td>
-                  <td>{b.guests}</td>
                   <td>{formatVND(b.totalPrice)}</td>
                   <td>
                     <span className={`badge-soft ${badge.cls}`}>{badge.label}</span>
+                    {refund && (
+                      <div className="mt-1">
+                        <span className={`badge-soft ${refund.cls}`}>{refund.label}</span>
+                      </div>
+                    )}
                   </td>
                   <td className="text-end">
-                    {b.status === 'pending' && (
-                      <Button
-                        size="sm"
-                        variant="outline-success"
-                        className="me-2"
-                        onClick={() =>
-                          changeStatus(b, 'confirmed', `Đã xác nhận đặt phòng #${b.id}`)
-                        }
-                      >
-                        Duyệt
-                      </Button>
-                    )}
-                    {b.status !== 'cancelled' && (
-                      <Button
-                        size="sm"
-                        variant="outline-danger"
-                        onClick={() => setCancelling(b)}
-                      >
-                        Hủy
-                      </Button>
+                    {refundPending ? (
+                      <>
+                        <Button
+                          size="sm"
+                          variant="outline-success"
+                          className="me-2"
+                          onClick={() =>
+                            patch(
+                              b,
+                              { status: 'cancelled', refundStatus: 'refunded' },
+                              `Đã hoàn tiền & hủy #${b.id}`
+                            )
+                          }
+                        >
+                          Duyệt hoàn tiền
+                        </Button>
+                        <Button
+                          size="sm"
+                          variant="outline-secondary"
+                          onClick={() =>
+                            patch(b, { refundStatus: 'denied' }, `Đã từ chối hoàn tiền #${b.id}`)
+                          }
+                        >
+                          Từ chối hoàn
+                        </Button>
+                      </>
+                    ) : (
+                      <>
+                        {b.status === 'pending' && (
+                          <>
+                            <Button
+                              size="sm"
+                              variant="outline-success"
+                              className="me-2"
+                              onClick={() =>
+                                patch(b, { status: 'confirmed' }, `Đã xác nhận #${b.id}`)
+                              }
+                            >
+                              Xác nhận
+                            </Button>
+                            <Button
+                              size="sm"
+                              variant="outline-danger"
+                              onClick={() =>
+                                patch(b, { status: 'rejected' }, `Đã từ chối #${b.id}`)
+                              }
+                            >
+                              Từ chối
+                            </Button>
+                          </>
+                        )}
+                        {b.status === 'confirmed' && (
+                          <>
+                            <Button
+                              size="sm"
+                              variant="outline-primary"
+                              className="me-2"
+                              onClick={() =>
+                                patch(b, { status: 'checked_in' }, `Đã nhận phòng #${b.id}`)
+                              }
+                            >
+                              Check-in
+                            </Button>
+                            <Button
+                              size="sm"
+                              variant="outline-danger"
+                              onClick={() => setCancelling(b)}
+                            >
+                              Hủy
+                            </Button>
+                          </>
+                        )}
+                        {b.status === 'checked_in' && (
+                          <Button
+                            size="sm"
+                            variant="outline-secondary"
+                            onClick={() =>
+                              patch(b, { status: 'checked_out' }, `Đã trả phòng #${b.id}`)
+                            }
+                          >
+                            Check-out
+                          </Button>
+                        )}
+                      </>
                     )}
                   </td>
                 </tr>
@@ -150,7 +231,7 @@ export default function ManagerBookings() {
             })}
             {!sorted.length && (
               <tr>
-                <td colSpan={9} className="text-center text-muted py-4">
+                <td colSpan={7} className="text-center text-muted py-4">
                   Không có đặt phòng nào.
                 </td>
               </tr>

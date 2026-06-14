@@ -7,13 +7,8 @@ import { getBookings } from '../../services/bookingService'
 import { getUsers } from '../../services/userService'
 import { formatVND } from '../../utils/format'
 import { totalRevenue } from '../../utils/revenueStats'
+import { BOOKING_STATUS } from '../../utils/bookingStatus'
 import { useOwnedHotels } from './useOwnedHotels'
-
-const STATUS_BADGE = {
-  pending: { cls: 'amber', label: 'Chờ duyệt' },
-  confirmed: { cls: 'green', label: 'Đã xác nhận' },
-  cancelled: { cls: 'red', label: 'Đã hủy' },
-}
 
 /** Tổng quan khu quản lý: số liệu khách sạn của manager + booking gần đây */
 export default function ManagerDashboard() {
@@ -85,7 +80,7 @@ export default function ManagerDashboard() {
           </thead>
           <tbody>
             {recent.map((b) => {
-              const badge = STATUS_BADGE[b.status] || STATUS_BADGE.pending
+              const badge = BOOKING_STATUS[b.status] || BOOKING_STATUS.pending
               return (
                 <tr key={b.id}>
                   <td>{userById[b.userId]?.fullName || '—'}</td>

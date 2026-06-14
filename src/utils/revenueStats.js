@@ -1,9 +1,11 @@
 // Thống kê doanh thu từ danh sách booking.
-// Chỉ booking đã xác nhận (confirmed) mới được tính là doanh thu thực tế.
+// Doanh thu thực tế = booking đã xác nhận / nhận phòng / trả phòng (REVENUE_STATUSES).
+
+import { REVENUE_STATUSES } from './bookingStatus'
 
 const MS_DAY = 86400000
 
-const confirmed = (bookings) => bookings.filter((b) => b.status === 'confirmed')
+const confirmed = (bookings) => bookings.filter((b) => REVENUE_STATUSES.includes(b.status))
 
 /** Tổng doanh thu của các booking đã xác nhận. */
 export function totalRevenue(bookings) {
