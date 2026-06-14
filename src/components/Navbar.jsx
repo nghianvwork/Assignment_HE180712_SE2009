@@ -35,7 +35,11 @@ export default function Navbar() {
     <header className={`lux-nav ${scrolled ? 'is-scrolled' : ''}`}>
       <div className="lux-nav-inner">
         <Link to="/" className="lux-nav-logo">
-          Hotel Luxury
+          <span className="lux-nav-logo-mark" aria-hidden="true" />
+          <span className="lux-nav-logo-text">
+            Hotel Luxury
+            <small>Curated Stays</small>
+          </span>
         </Link>
 
         <nav className={`lux-nav-links ${menuOpen ? 'is-open' : ''}`}>
