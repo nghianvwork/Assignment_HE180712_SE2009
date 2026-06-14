@@ -17,6 +17,7 @@ import ManagerPricing from './pages/manager/ManagerPricing'
 import ManagerVouchers from './pages/manager/ManagerVouchers'
 import ManagerBookings from './pages/manager/ManagerBookings'
 import ManagerRevenue from './pages/manager/ManagerRevenue'
+import ManagerReviews from './pages/manager/ManagerReviews'
 
 // Trang tạm cho các khu vực sẽ làm sau
 function Placeholder({ title }) {
@@ -66,6 +67,7 @@ function App() {
         <Route path="vouchers" element={<ManagerVouchers />} />
         <Route path="bookings" element={<ManagerBookings />} />
         <Route path="revenue" element={<ManagerRevenue />} />
+        <Route path="reviews" element={<ManagerReviews />} />
       </Route>
 
       <Route path="*" element={<Placeholder title="404 - Không tìm thấy trang" />} />

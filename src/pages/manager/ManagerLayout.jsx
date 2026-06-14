@@ -11,6 +11,7 @@ const MENU = [
   { to: '/manager/vouchers', label: 'Khuyến mãi', icon: '🎟' },
   { to: '/manager/bookings', label: 'Đặt phòng', icon: '📑' },
   { to: '/manager/revenue', label: 'Báo cáo', icon: '📊' },
+  { to: '/manager/reviews', label: 'Đánh giá', icon: '⭐' },
 ]
 
 /** Khung khu quản lý khách sạn: sidebar điều hướng + vùng nội dung (Outlet) */
