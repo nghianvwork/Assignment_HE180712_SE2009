@@ -4,6 +4,7 @@ import '../admin/Admin.css'
 
 const MENU = [
   { to: '/manager', label: 'Tổng quan', icon: '▦', end: true },
+  { to: '/manager/hotels', label: 'Khách sạn', icon: '🏨' },
   { to: '/manager/rooms', label: 'Phòng', icon: '🛏' },
   { to: '/manager/services', label: 'Dịch vụ', icon: '🛎' },
   { to: '/manager/bookings', label: 'Đặt phòng', icon: '📑' },
