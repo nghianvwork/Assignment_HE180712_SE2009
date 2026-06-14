@@ -5,6 +5,7 @@ import HotelsPage from './pages/HotelsPage'
 import HotelDetailPage from './pages/HotelDetailPage'
 import MyBookingsPage from './pages/MyBookingsPage'
 import WishlistPage from './pages/WishlistPage'
+import ProfilePage from './pages/ProfilePage'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
 import ProtectedRoute from './components/ProtectedRoute'
@@ -57,6 +58,14 @@ function App() {
         element={
           <ProtectedRoute>
             <WishlistPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/account/profile"
+        element={
+          <ProtectedRoute>
+            <ProfilePage />
           </ProtectedRoute>
         }
       />

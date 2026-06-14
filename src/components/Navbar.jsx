@@ -49,7 +49,9 @@ export default function Navbar() {
         <div className="lux-nav-actions">
           {isAuthenticated ? (
             <div className="lux-nav-user">
-              <span className="lux-nav-hello">Xin chào, {user.fullName.split(' ').pop()}</span>
+              <Link to="/account/profile" className="lux-nav-hello">
+                Xin chào, {user.fullName.split(' ').pop()}
+              </Link>
               {dashboardPath ? (
                 <Link to={dashboardPath} className="lux-nav-btn ghost">
                   Quản lý

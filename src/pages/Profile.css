@@ -1,0 +1,66 @@
+/* ===== Trang hồ sơ cá nhân — theme luxury ===== */
+.profile-page {
+  background: var(--c-cream);
+  min-height: 100vh;
+}
+.pf-wrap {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 110px 24px 70px;
+}
+.pf-title {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4vw, 40px);
+  color: var(--c-ink);
+  margin: 0 0 28px;
+}
+.pf-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: start;
+}
+.pf-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 26px;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
+}
+.pf-card h2 {
+  font-family: var(--font-display);
+  font-size: 21px;
+  color: var(--c-ink);
+  margin: 0 0 20px;
+}
+.pf-avatar-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.pf-avatar {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.pf-avatar-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--c-dark);
+  color: var(--c-champagne);
+  font-family: var(--font-display);
+  font-size: 26px;
+}
+.pf-avatar-field {
+  flex: 1;
+  min-width: 0;
+}
+
+@media (max-width: 768px) {
+  .pf-grid {
+    grid-template-columns: 1fr;
+  }
+}
