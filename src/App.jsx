@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom'
 import { Container } from 'react-bootstrap'
 import HomePage from './pages/HomePage'
+import HotelsPage from './pages/HotelsPage'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
 import ProtectedRoute from './components/ProtectedRoute'
@@ -34,6 +35,7 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
+      <Route path="/hotels" element={<HotelsPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
 

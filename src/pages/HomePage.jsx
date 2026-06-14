@@ -68,7 +68,12 @@ export default function HomePage() {
 
   const handleSearch = (e) => {
     e.preventDefault()
-    toast.info('Tính năng tìm kiếm phòng đang được hoàn thiện')
+    const params = new URLSearchParams()
+    if (search.city) params.set('city', search.city)
+    if (search.checkIn) params.set('checkIn', search.checkIn)
+    if (search.checkOut) params.set('checkOut', search.checkOut)
+    if (search.guests) params.set('guests', search.guests)
+    navigate(`/hotels?${params.toString()}`)
   }
 
   return (
@@ -181,7 +186,7 @@ export default function HomePage() {
                 <p className="cc-city">{hotel.city}</p>
                 <h3>{hotel.name}</h3>
                 <p className="cc-desc">{hotel.description}</p>
-                <button className="cc-link" onClick={() => navigate('/login')}>
+                <button className="cc-link" onClick={() => navigate('/hotels')}>
                   Khám phá →
                 </button>
               </div>
@@ -215,7 +220,7 @@ export default function HomePage() {
                   <span className="rc-price">
                     {formatVND(room.price)} <small>/ đêm</small>
                   </span>
-                  <button className="rc-btn" onClick={() => navigate('/login')}>
+                  <button className="rc-btn" onClick={() => navigate('/hotels')}>
                     Đặt phòng
                   </button>
                 </div>
