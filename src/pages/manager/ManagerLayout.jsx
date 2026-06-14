@@ -8,6 +8,7 @@ const MENU = [
   { to: '/manager/rooms', label: 'Phòng', icon: '🛏' },
   { to: '/manager/services', label: 'Dịch vụ', icon: '🛎' },
   { to: '/manager/pricing', label: 'Giá theo mùa', icon: '🏷' },
+  { to: '/manager/vouchers', label: 'Khuyến mãi', icon: '🎟' },
   { to: '/manager/bookings', label: 'Đặt phòng', icon: '📑' },
   { to: '/manager/revenue', label: 'Doanh thu', icon: '📊' },
 ]
