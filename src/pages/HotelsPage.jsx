@@ -20,13 +20,17 @@ const RATING_TIERS = [
   { v: 4, l: '4.0+' },
   { v: 3, l: '3.0+' },
 ]
-const PRICE_TIERS = [
-  { v: 0, l: 'Không giới hạn' },
-  { v: 700000, l: '≤ 700.000₫' },
-  { v: 1200000, l: '≤ 1.200.000₫' },
-  { v: 2000000, l: '≤ 2.000.000₫' },
-  { v: 5000000, l: '≤ 5.000.000₫' },
-]
+// Sinh các mốc lọc giá từ giá phòng thực tế trong DB
+function buildPriceTiers(prices) {
+  const tiers = [{ v: 0, l: 'Không giới hạn' }]
+  if (!prices.length) return tiers
+  const max = Math.max(...prices)
+  for (const f of [0.25, 0.5, 0.75]) {
+    const v = Math.ceil((max * f) / 100000) * 100000
+    tiers.push({ v, l: `≤ ${v.toLocaleString('vi-VN')}₫` })
+  }
+  return tiers
+}
 
 /** Trang danh sách khách sạn: tìm kiếm, lọc, sắp xếp */
 export default function HotelsPage() {
@@ -64,6 +68,7 @@ export default function HotelsPage() {
   const allAmenities = [...new Set(hotels.flatMap((h) => h.amenities || []))]
   const allRoomTypes = [...new Set(rooms.map((r) => r.type))]
   const allCities = [...new Set(hotels.map((h) => h.city).filter(Boolean))]
+  const priceTiers = buildPriceTiers(rooms.map((r) => r.price))
   const minPriceOf = (id) => {
     const rs = roomsByHotel[id] || []
     return rs.length ? Math.min(...rs.map((r) => r.price)) : 0
@@ -143,7 +148,7 @@ export default function HotelsPage() {
           <div className="hp-fgroup">
             <label>Giá tối đa / đêm</label>
             <select value={priceMax} onChange={(e) => setPriceMax(+e.target.value)}>
-              {PRICE_TIERS.map((t) => (
+              {priceTiers.map((t) => (
                 <option key={t.v} value={t.v}>
                   {t.l}
                 </option>
