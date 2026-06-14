@@ -177,6 +177,66 @@
   border-radius: 8px;
 }
 
+/* Người quản lý / chủ khách sạn */
+.hd-host {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  background: #fff;
+  border: 1px solid #ece7dd;
+  border-radius: 10px;
+  padding: 18px 20px;
+}
+.hd-host-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--c-dark);
+  color: var(--c-champagne);
+  font-family: var(--font-display);
+  font-size: 22px;
+}
+.hd-host-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.hd-host-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+.hd-host-info strong {
+  font-size: 17px;
+  color: var(--c-ink);
+}
+.hd-host-role {
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--c-gold);
+}
+.hd-host-contact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  margin-top: 6px;
+}
+.hd-host-contact a {
+  font-size: 13.5px;
+  color: var(--c-ink-soft);
+  text-decoration: none;
+}
+.hd-host-contact a:hover {
+  color: var(--c-gold);
+}
+
 /* Reviews */
 .hd-review {
   border-top: 1px solid #efece6;

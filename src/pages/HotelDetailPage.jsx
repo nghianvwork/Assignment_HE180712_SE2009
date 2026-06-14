@@ -92,6 +92,13 @@ export default function HotelDetailPage() {
 
   const userById = Object.fromEntries(users.map((u) => [u.id, u]))
   const gallery = [hotel.image, ...rooms.map((r) => r.image)].filter(Boolean).slice(0, 5)
+  const owner = users.find((u) => u.id === hotel.ownerId)
+  const ownerInitials = (owner?.fullName || '')
+    .split(' ')
+    .slice(-2)
+    .map((w) => w[0])
+    .join('')
+    .toUpperCase()
 
   const openBooking = (room) => {
     if (!user) {
@@ -154,6 +161,29 @@ export default function HotelDetailPage() {
               <h2>Giới thiệu</h2>
               <p>{hotel.description}</p>
             </section>
+
+            {owner && (
+              <section className="hd-block">
+                <h2>Người quản lý</h2>
+                <div className="hd-host">
+                  <div className="hd-host-avatar">
+                    {owner.avatar ? (
+                      <img src={owner.avatar} alt={owner.fullName} />
+                    ) : (
+                      <span>{ownerInitials}</span>
+                    )}
+                  </div>
+                  <div className="hd-host-info">
+                    <strong>{owner.fullName}</strong>
+                    <span className="hd-host-role">Quản lý khách sạn</span>
+                    <div className="hd-host-contact">
+                      <a href={`mailto:${owner.email}`}>✉ {owner.email}</a>
+                      {owner.phone && <a href={`tel:${owner.phone}`}>☎ {owner.phone}</a>}
+                    </div>
+                  </div>
+                </div>
+              </section>
+            )}
 
             {(hotel.amenities || []).length > 0 && (
               <section className="hd-block">
