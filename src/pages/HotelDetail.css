@@ -158,12 +158,83 @@
 .hd-amenity {
   color: var(--c-ink-soft);
   font-size: 14.5px;
+  padding: 6px 14px;
+  background: #fff;
+  border: 1px solid #ece7dd;
+  border-radius: 22px;
+  transition: border-color 0.3s var(--ease-lux), color 0.3s var(--ease-lux),
+    transform 0.3s var(--ease-lux);
+}
+.hd-amenity:hover {
+  border-color: var(--c-gold);
+  color: var(--c-gold);
+  transform: translateY(-2px);
 }
 .hd-map {
   width: 100%;
   height: 300px;
   border: 0;
   border-radius: 8px;
+}
+
+/* Người quản lý / chủ khách sạn */
+.hd-host {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  background: #fff;
+  border: 1px solid #ece7dd;
+  border-radius: 10px;
+  padding: 18px 20px;
+}
+.hd-host-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--c-dark);
+  color: var(--c-champagne);
+  font-family: var(--font-display);
+  font-size: 22px;
+}
+.hd-host-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.hd-host-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+.hd-host-info strong {
+  font-size: 17px;
+  color: var(--c-ink);
+}
+.hd-host-role {
+  font-size: 12px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--c-gold);
+}
+.hd-host-contact {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  margin-top: 6px;
+}
+.hd-host-contact a {
+  font-size: 13.5px;
+  color: var(--c-ink-soft);
+  text-decoration: none;
+}
+.hd-host-contact a:hover {
+  color: var(--c-gold);
 }
 
 /* Reviews */
@@ -210,11 +281,20 @@
   overflow: hidden;
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
   margin-bottom: 18px;
+  transition: transform 0.4s var(--ease-lux), box-shadow 0.4s var(--ease-lux);
+}
+.hd-room:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 44px rgba(0, 0, 0, 0.13);
 }
 .hd-room > img {
   width: 100%;
   height: 150px;
   object-fit: cover;
+  transition: transform 0.6s var(--ease-lux);
+}
+.hd-room:hover > img {
+  transform: scale(1.05);
 }
 .hd-room-body {
   padding: 14px 16px 16px;

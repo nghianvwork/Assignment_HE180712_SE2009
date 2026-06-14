@@ -7,6 +7,8 @@ import Reveal from '../components/Reveal'
 import RevealText from '../components/RevealText'
 import { getHotels } from '../services/hotelService'
 import { getRooms } from '../services/roomService'
+import { getReviews } from '../services/reviewService'
+import { getUsers } from '../services/userService'
 import { formatVND } from '../utils/format'
 import './Home.css'
 
@@ -25,46 +27,52 @@ const EXPERIENCES = [
   },
 ]
 
-const NARRATIVES = [
-  {
-    image:
-      'https://images.unsplash.com/photo-1523906834658-6e24ef2386f9?w=900&q=80',
-    tag: 'Hành trình',
-    title: 'Buổi sớm yên bình giữa miền đồi Tuscany',
-    quote:
-      '“Một kỳ nghỉ vượt xa mọi kỳ vọng — từng chi tiết đều thấm đẫm sự tinh tế.”',
-    author: 'Mai Lan, Hà Nội',
-  },
-  {
-    image:
-      'https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=900&q=80',
-    tag: 'Cảm hứng',
-    title: 'Khi ánh bình minh chạm vào đường chân trời',
-    quote:
-      '“Không gian, dịch vụ và sự chu đáo khiến tôi muốn quay lại ngay lập tức.”',
-    author: 'Quốc Anh, Đà Nẵng',
-  },
-]
-
 export default function HomePage() {
   const navigate = useNavigate()
   const [hotels, setHotels] = useState([])
   const [rooms, setRooms] = useState([])
+  const [reviews, setReviews] = useState([])
+  const [users, setUsers] = useState([])
   const [search, setSearch] = useState({ city: '', checkIn: '', checkOut: '', guests: 2 })
 
   useEffect(() => {
     let active = true
-    Promise.all([getHotels({ status: 'active' }), getRooms({ available: true })])
-      .then(([h, r]) => {
+    Promise.all([
+      getHotels({ status: 'active' }),
+      getRooms({ available: true }),
+      getReviews(),
+      getUsers(),
+    ])
+      .then(([h, r, rv, u]) => {
         if (!active) return
         setHotels(h)
         setRooms(r.slice(0, 3))
+        setReviews(rv)
+        setUsers(u)
       })
       .catch(() => toast.error('Không tải được dữ liệu khách sạn'))
     return () => {
       active = false
     }
   }, [])
+
+  // Danh sách điểm đến lấy từ dữ liệu khách sạn (không hardcode)
+  const cities = [...new Set(hotels.map((h) => h.city).filter(Boolean))]
+
+  // Cảm nhận khách hàng lấy từ đánh giá thật trong DB
+  const userById = Object.fromEntries(users.map((u) => [u.id, u]))
+  const hotelById = Object.fromEntries(hotels.map((h) => [h.id, h]))
+  const narratives = reviews
+    .filter((r) => r.comment && r.rating >= 4)
+    .sort((a, b) => (b.rating || 0) - (a.rating || 0))
+    .slice(0, 2)
+    .map((r) => ({
+      image: hotelById[r.hotelId]?.image,
+      tag: `${r.rating}★ · ${hotelById[r.hotelId]?.city || ''}`,
+      title: hotelById[r.hotelId]?.name || 'Cảm nhận',
+      quote: `“${r.comment}”`,
+      author: userById[r.userId]?.fullName || 'Khách',
+    }))
 
   const handleSearch = (e) => {
     e.preventDefault()
@@ -109,9 +117,11 @@ export default function HomePage() {
               onChange={(e) => setSearch((s) => ({ ...s, city: e.target.value }))}
             >
               <option value="">Mọi điểm đến</option>
-              <option>Nha Trang</option>
-              <option>Hồ Chí Minh</option>
-              <option>Hà Nội</option>
+              {cities.map((c) => (
+                <option key={c} value={c}>
+                  {c}
+                </option>
+              ))}
             </select>
           </div>
           <div className="hs-divider" />
@@ -268,8 +278,8 @@ export default function HomePage() {
         </div>
 
         <div className="narrative-grid">
-          {NARRATIVES.map((n, i) => (
-            <Reveal key={n.title} className="narrative-card" delay={i * 150} as="article">
+          {narratives.map((n, i) => (
+            <Reveal key={i} className="narrative-card" delay={i * 150} as="article">
               <div className="nc-media">
                 <img src={n.image} alt={n.title} loading="lazy" />
               </div>

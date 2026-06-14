@@ -48,6 +48,18 @@ export async function isEmailTaken(email) {
   return users.length > 0
 }
 
+/** Đặt lại mật khẩu theo username/email (không có email/OTP nên xác minh bằng định danh) */
+export async function resetPassword(identifier, newPassword) {
+  let users = await axiosClient.get('/users', { params: { username: identifier } })
+  if (!users.length) {
+    users = await axiosClient.get('/users', { params: { email: identifier } })
+  }
+  const user = users[0]
+  if (!user) throw new Error('Không tìm thấy tài khoản với thông tin này')
+  await axiosClient.patch(`/users/${user.id}`, { password: newPassword })
+  return user
+}
+
 /** Đăng ký tài khoản mới (mặc định role = user) */
 export async function register(data) {
   const newUser = {

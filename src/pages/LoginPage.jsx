@@ -3,7 +3,7 @@ import { Link, useNavigate, useLocation } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { useAuth } from '../context/AuthContext'
 import AuthVisual from './AuthVisual'
-import { EyeIcon, GoogleIcon, AppleIcon } from './icons'
+import { EyeIcon } from './icons'
 import './Auth.css'
 
 export default function LoginPage() {
@@ -48,8 +48,6 @@ export default function LoginPage() {
     }
   }
 
-  const comingSoon = () => toast.info('Tính năng đang được phát triển')
-
   return (
     <div className="lux-auth">
       <AuthVisual />
@@ -87,9 +85,9 @@ export default function LoginPage() {
               <label className="lux-label" htmlFor="password">
                 Mật khẩu
               </label>
-              <button type="button" className="lux-link-mini" onClick={comingSoon}>
+              <Link to="/forgot-password" className="lux-link-mini">
                 Quên mật khẩu?
-              </button>
+              </Link>
             </div>
             <div className="lux-input-wrap">
               <input
@@ -122,17 +120,6 @@ export default function LoginPage() {
           <button type="submit" className="lux-btn" disabled={loading}>
             {loading ? 'Đang đăng nhập...' : 'Sign In'}
           </button>
-
-          <div className="lux-divider">Hoặc tiếp tục với</div>
-
-          <div className="lux-social">
-            <button type="button" onClick={comingSoon}>
-              <GoogleIcon /> Google
-            </button>
-            <button type="button" onClick={comingSoon}>
-              <AppleIcon /> Apple
-            </button>
-          </div>
 
           <div className="lux-switch">
             Chưa có tài khoản? <Link to="/register">Đăng ký ngay</Link>
