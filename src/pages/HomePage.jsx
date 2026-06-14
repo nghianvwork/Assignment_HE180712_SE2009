@@ -181,7 +181,7 @@ export default function HomePage() {
         </div>
 
         <div className="collection-grid">
-          {hotels.map((hotel, i) => (
+          {hotels.slice(0, 3).map((hotel, i) => (
             <Reveal
               key={hotel.id}
               className="collection-card"

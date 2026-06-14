@@ -275,6 +275,23 @@
   color: var(--c-ink);
   margin: 0 0 16px;
 }
+.hd-show-rooms {
+  width: 100%;
+  padding: 14px 20px;
+  background: var(--c-dark);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.3s var(--ease-lux), transform 0.3s var(--ease-lux);
+}
+.hd-show-rooms:hover {
+  background: var(--c-gold);
+  transform: translateY(-1px);
+}
 .hd-room {
   background: #fff;
   border-radius: 8px;

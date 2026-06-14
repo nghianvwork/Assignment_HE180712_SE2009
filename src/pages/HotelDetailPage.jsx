@@ -33,6 +33,7 @@ export default function HotelDetailPage() {
   const [mainImg, setMainImg] = useState('')
   const [activeRoom, setActiveRoom] = useState(null)
   const [favId, setFavId] = useState(null)
+  const [showRooms, setShowRooms] = useState(false)
 
   useEffect(() => {
     let active = true
@@ -233,7 +234,13 @@ export default function HotelDetailPage() {
 
           <aside className="hd-rooms">
             <h2>Phòng &amp; giá</h2>
-            {rooms.map((room) => (
+            {!showRooms ? (
+              <button className="hd-show-rooms" onClick={() => setShowRooms(true)}>
+                Xem các phòng ({rooms.length})
+              </button>
+            ) : (
+              <>
+                {rooms.map((room) => (
               <article key={room.id} className="hd-room">
                 <img src={room.image} alt={room.name} loading="lazy" />
                 <div className="hd-room-body">
@@ -257,7 +264,9 @@ export default function HotelDetailPage() {
                 </div>
               </article>
             ))}
-            {!rooms.length && <p className="text-muted">Chưa có phòng.</p>}
+                {!rooms.length && <p className="text-muted">Chưa có phòng.</p>}
+              </>
+            )}
           </aside>
         </div>
       </div>
