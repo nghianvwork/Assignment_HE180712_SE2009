@@ -50,10 +50,19 @@ export default function Navbar() {
           {isAuthenticated ? (
             <div className="lux-nav-user">
               <span className="lux-nav-hello">Xin chào, {user.fullName.split(' ').pop()}</span>
-              {dashboardPath && (
+              {dashboardPath ? (
                 <Link to={dashboardPath} className="lux-nav-btn ghost">
                   Quản lý
                 </Link>
+              ) : (
+                <>
+                  <Link to="/account/wishlist" className="lux-nav-btn ghost">
+                    ♥ Yêu thích
+                  </Link>
+                  <Link to="/account/bookings" className="lux-nav-btn ghost">
+                    Đặt phòng của tôi
+                  </Link>
+                </>
               )}
               <button className="lux-nav-btn" onClick={handleLogout}>
                 Đăng xuất

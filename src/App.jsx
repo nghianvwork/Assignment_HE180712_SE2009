@@ -1,6 +1,10 @@
 import { Routes, Route } from 'react-router-dom'
 import { Container } from 'react-bootstrap'
 import HomePage from './pages/HomePage'
+import HotelsPage from './pages/HotelsPage'
+import HotelDetailPage from './pages/HotelDetailPage'
+import MyBookingsPage from './pages/MyBookingsPage'
+import WishlistPage from './pages/WishlistPage'
 import LoginPage from './pages/LoginPage'
 import RegisterPage from './pages/RegisterPage'
 import ProtectedRoute from './components/ProtectedRoute'
@@ -34,8 +38,28 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
+      <Route path="/hotels" element={<HotelsPage />} />
+      <Route path="/hotels/:id" element={<HotelDetailPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
+
+      {/* Khu vực khách hàng — cần đăng nhập */}
+      <Route
+        path="/account/bookings"
+        element={
+          <ProtectedRoute>
+            <MyBookingsPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/account/wishlist"
+        element={
+          <ProtectedRoute>
+            <WishlistPage />
+          </ProtectedRoute>
+        }
+      />
 
       {/* Khu vực quản trị — admin chỉ quản lý tài khoản & khách sạn */}
       <Route

@@ -1,0 +1,136 @@
+/* ===== Lịch sử đặt phòng của khách — theme luxury ===== */
+.mybk-page {
+  background: var(--c-cream);
+  min-height: 100vh;
+}
+.mybk-wrap {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 110px 24px 70px;
+}
+.mybk-title {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4vw, 40px);
+  color: var(--c-ink);
+  margin: 0 0 4px;
+}
+.mybk-sub {
+  color: var(--c-muted);
+  margin: 0 0 28px;
+}
+.mybk-card {
+  display: flex;
+  gap: 18px;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
+  margin-bottom: 18px;
+}
+.mybk-img {
+  width: 200px;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+.mybk-info {
+  flex: 1;
+  padding: 18px 20px;
+  min-width: 0;
+}
+.mybk-info-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+.mybk-hotel {
+  font-family: var(--font-display);
+  font-size: 21px;
+  color: var(--c-ink);
+  text-decoration: none;
+}
+.mybk-hotel:hover {
+  color: var(--c-gold);
+}
+.mybk-room {
+  color: var(--c-muted);
+  font-size: 13.5px;
+  margin: 4px 0 0;
+}
+.mybk-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  margin: 14px 0;
+  font-size: 13.5px;
+  color: var(--c-ink-soft);
+}
+.mybk-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  border-top: 1px solid #f1eee8;
+  padding-top: 14px;
+  flex-wrap: wrap;
+}
+.mybk-total {
+  font-family: var(--font-display);
+  font-size: 22px;
+  color: var(--c-ink);
+}
+.mybk-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.mybk-btn {
+  background: var(--c-dark);
+  color: #fff;
+  border: none;
+  padding: 9px 18px;
+  border-radius: 5px;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: background 0.3s ease;
+}
+.mybk-btn:hover {
+  background: var(--c-gold);
+}
+.mybk-btn.ghost {
+  background: #fff;
+  color: var(--c-ink);
+  border: 1px solid #e0dacf;
+}
+.mybk-btn.ghost:hover {
+  border-color: var(--c-gold);
+  color: var(--c-gold);
+  background: #fff;
+}
+.mybk-done {
+  font-size: 13px;
+  color: #2e7d43;
+  font-weight: 600;
+}
+.mybk-empty {
+  text-align: center;
+  padding: 70px 0;
+  color: var(--c-muted);
+}
+.mybk-empty p {
+  margin-bottom: 18px;
+}
+
+@media (max-width: 640px) {
+  .mybk-card {
+    flex-direction: column;
+  }
+  .mybk-img {
+    width: 100%;
+    height: 180px;
+  }
+}

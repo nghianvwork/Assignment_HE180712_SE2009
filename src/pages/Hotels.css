@@ -1,0 +1,280 @@
+/* ===== Trang danh sách khách sạn — theme luxury (ink/gold/cream) ===== */
+.hotels-page {
+  background: var(--c-cream);
+  min-height: 100vh;
+}
+
+/* ===== Hero ===== */
+.hp-hero {
+  position: relative;
+  padding: 150px 24px 60px;
+  background: linear-gradient(rgba(15, 13, 11, 0.62), rgba(15, 13, 11, 0.72)),
+    url('https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=1600&q=80') center/cover;
+  color: #fff;
+  text-align: center;
+}
+.hp-hero-inner {
+  max-width: 880px;
+  margin: 0 auto;
+}
+.hp-eyebrow {
+  font-size: 12px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--c-gold-soft);
+  margin: 0 0 12px;
+}
+.hp-hero h1 {
+  font-family: var(--font-display);
+  font-size: clamp(34px, 5vw, 56px);
+  font-weight: 600;
+  margin: 0 0 28px;
+  letter-spacing: 0.5px;
+}
+.hp-searchbar {
+  display: flex;
+  gap: 12px;
+  max-width: 680px;
+  margin: 0 auto;
+  background: rgba(255, 255, 255, 0.96);
+  padding: 10px;
+  border-radius: 6px;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.3);
+}
+.hp-searchbar input,
+.hp-searchbar select {
+  border: none;
+  background: transparent;
+  font-size: 15px;
+  color: var(--c-ink);
+  font-family: var(--font-body);
+  padding: 10px 12px;
+}
+.hp-searchbar input {
+  flex: 1;
+  border-right: 1px solid #e7e2d8;
+  outline: none;
+}
+.hp-searchbar select {
+  cursor: pointer;
+  outline: none;
+}
+
+/* ===== Body: filter + results ===== */
+.hp-body {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 40px 24px 70px;
+  display: grid;
+  grid-template-columns: 270px 1fr;
+  gap: 32px;
+}
+
+/* ===== Filters ===== */
+.hp-filters {
+  position: sticky;
+  top: 90px;
+  align-self: start;
+  background: #fff;
+  border-radius: 8px;
+  padding: 22px;
+  box-shadow: 0 6px 26px rgba(0, 0, 0, 0.06);
+}
+.hp-filter-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 18px;
+  border-bottom: 1px solid #efece6;
+  padding-bottom: 14px;
+}
+.hp-filter-head h3 {
+  font-family: var(--font-display);
+  font-size: 20px;
+  margin: 0;
+  color: var(--c-ink);
+}
+.hp-filter-head button {
+  background: none;
+  border: none;
+  color: var(--c-gold);
+  font-size: 12.5px;
+  cursor: pointer;
+}
+.hp-filter-head button:hover {
+  text-decoration: underline;
+}
+.hp-fgroup {
+  margin-bottom: 22px;
+}
+.hp-fgroup > label {
+  display: block;
+  font-size: 11.5px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--c-gold);
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+.hp-fgroup select {
+  width: 100%;
+  padding: 9px 10px;
+  border: 1px solid #e3ded4;
+  border-radius: 5px;
+  font-size: 14px;
+  background: #fff;
+  color: var(--c-ink);
+  cursor: pointer;
+}
+.hp-chips {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.hp-chips button {
+  border: 1px solid #e3ded4;
+  background: #fff;
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 13px;
+  cursor: pointer;
+  color: var(--c-ink-soft);
+  transition: all 0.2s ease;
+}
+.hp-chips button:hover {
+  border-color: var(--c-gold);
+}
+.hp-chips button.on {
+  background: var(--c-dark);
+  color: #fff;
+  border-color: var(--c-dark);
+}
+.hp-amenities {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 230px;
+  overflow-y: auto;
+}
+.hp-check {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 14px;
+  color: var(--c-ink-soft);
+  cursor: pointer;
+}
+.hp-check input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--c-gold);
+}
+
+/* ===== Results ===== */
+.hp-count {
+  font-size: 14px;
+  color: var(--c-muted);
+  margin: 0 0 18px;
+}
+.hp-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+.hp-card {
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 6px 26px rgba(0, 0, 0, 0.06);
+  transition: transform 0.4s var(--ease-lux), box-shadow 0.4s var(--ease-lux);
+}
+.hp-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 22px 50px rgba(0, 0, 0, 0.14);
+}
+.hp-card-media {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+.hp-card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s var(--ease-lux);
+}
+.hp-card:hover .hp-card-media img {
+  transform: scale(1.06);
+}
+.hp-rating {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(20, 20, 20, 0.78);
+  color: var(--c-champagne);
+  font-size: 12.5px;
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+.hp-card-body {
+  padding: 18px 20px 20px;
+}
+.hp-city {
+  font-size: 11.5px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--c-gold);
+  margin: 0 0 6px;
+}
+.hp-card-body h3 {
+  font-family: var(--font-display);
+  font-size: 20px;
+  margin: 0 0 8px;
+  color: var(--c-ink);
+  line-height: 1.25;
+}
+.hp-amen {
+  font-size: 13px;
+  color: var(--c-muted);
+  margin: 0 0 16px;
+  min-height: 19px;
+}
+.hp-card-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid #f1eee8;
+  padding-top: 14px;
+}
+.hp-price {
+  font-family: var(--font-display);
+  font-size: 18px;
+  color: var(--c-ink);
+}
+.hp-price small {
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--c-muted);
+}
+.hp-cardlink {
+  font-size: 13px;
+  color: var(--c-gold);
+  font-weight: 600;
+}
+.hp-empty {
+  grid-column: 1 / -1;
+  text-align: center;
+  color: var(--c-muted);
+  padding: 60px 0;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 900px) {
+  .hp-body {
+    grid-template-columns: 1fr;
+  }
+  .hp-filters {
+    position: static;
+  }
+}
