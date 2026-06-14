@@ -12,6 +12,7 @@ import ManagerLayout from './pages/manager/ManagerLayout'
 import ManagerDashboard from './pages/manager/ManagerDashboard'
 import ManagerHotels from './pages/manager/ManagerHotels'
 import ManagerRooms from './pages/manager/ManagerRooms'
+import ManagerCalendar from './pages/manager/ManagerCalendar'
 import ManagerServices from './pages/manager/ManagerServices'
 import ManagerPricing from './pages/manager/ManagerPricing'
 import ManagerVouchers from './pages/manager/ManagerVouchers'
@@ -62,6 +63,7 @@ function App() {
         <Route index element={<ManagerDashboard />} />
         <Route path="hotels" element={<ManagerHotels />} />
         <Route path="rooms" element={<ManagerRooms />} />
+        <Route path="calendar" element={<ManagerCalendar />} />
         <Route path="services" element={<ManagerServices />} />
         <Route path="pricing" element={<ManagerPricing />} />
         <Route path="vouchers" element={<ManagerVouchers />} />
