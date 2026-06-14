@@ -286,6 +286,26 @@
       "available": true
     }
   ],
+  "pricingRules": [
+    {
+      "id": "1",
+      "hotelId": "1",
+      "roomId": "1",
+      "label": "Cao điểm hè",
+      "startDate": "2026-06-01",
+      "endDate": "2026-08-31",
+      "price": 1600000
+    },
+    {
+      "id": "2",
+      "hotelId": "1",
+      "roomId": "2",
+      "label": "Lễ Quốc khánh 2/9",
+      "startDate": "2026-09-01",
+      "endDate": "2026-09-03",
+      "price": 6000000
+    }
+  ],
   "bookings": [
     {
       "id": "1",
