@@ -93,7 +93,7 @@ Xây dựng một nền tảng đặt phòng khách sạn nhiều chi nhánh (mu
 - 📊 Doanh thu: biểu đồ theo **tháng** & theo **tuần**, doanh thu theo từng khách sạn
 
 ### Admin
-- 👤 Quản lý tài khoản (xem, khóa/mở, phân vai trò, xóa)
+- 👤 CRUD tài khoản (thêm/sửa/xóa), khóa/mở, phân vai trò
 - 🏨 Quản lý toàn bộ khách sạn (CRUD, gán chủ sở hữu)
 - 📊 Tổng quan hệ thống: biểu đồ **người dùng theo vai trò** & **khách sạn theo thành phố**
 
