@@ -186,7 +186,7 @@ export default function HomePage() {
                 <p className="cc-city">{hotel.city}</p>
                 <h3>{hotel.name}</h3>
                 <p className="cc-desc">{hotel.description}</p>
-                <button className="cc-link" onClick={() => navigate('/hotels')}>
+                <button className="cc-link" onClick={() => navigate(`/hotels/${hotel.id}`)}>
                   Khám phá →
                 </button>
               </div>
@@ -220,7 +220,7 @@ export default function HomePage() {
                   <span className="rc-price">
                     {formatVND(room.price)} <small>/ đêm</small>
                   </span>
-                  <button className="rc-btn" onClick={() => navigate('/hotels')}>
+                  <button className="rc-btn" onClick={() => navigate(`/hotels/${room.hotelId}`)}>
                     Đặt phòng
                   </button>
                 </div>

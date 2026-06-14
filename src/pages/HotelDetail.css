@@ -1,0 +1,265 @@
+/* ===== Trang chi tiết khách sạn — theme luxury ===== */
+.hotel-detail {
+  background: var(--c-cream);
+  min-height: 100vh;
+}
+.hd-loading {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--c-muted);
+}
+
+/* Gallery */
+.hd-gallery {
+  padding-top: 76px;
+}
+.hd-main {
+  height: clamp(320px, 52vh, 560px);
+  overflow: hidden;
+}
+.hd-main img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.hd-thumbs {
+  display: flex;
+  gap: 10px;
+  max-width: 1140px;
+  margin: 12px auto 0;
+  padding: 0 24px;
+  flex-wrap: wrap;
+}
+.hd-thumbs button {
+  width: 96px;
+  height: 66px;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  overflow: hidden;
+  padding: 0;
+  cursor: pointer;
+  background: none;
+  opacity: 0.7;
+  transition: opacity 0.25s ease, border-color 0.25s ease;
+}
+.hd-thumbs button.on,
+.hd-thumbs button:hover {
+  opacity: 1;
+  border-color: var(--c-gold);
+}
+.hd-thumbs img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Wrap */
+.hd-wrap {
+  max-width: 1140px;
+  margin: 0 auto;
+  padding: 34px 24px 70px;
+}
+.hd-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  flex-wrap: wrap;
+  border-bottom: 1px solid #e7e2d8;
+  padding-bottom: 24px;
+  margin-bottom: 30px;
+}
+.hd-city {
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--c-gold);
+  margin: 0 0 8px;
+}
+.hd-head h1 {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 4vw, 42px);
+  margin: 0 0 8px;
+  color: var(--c-ink);
+}
+.hd-addr {
+  color: var(--c-muted);
+  margin: 0;
+}
+.hd-rating {
+  text-align: right;
+  white-space: nowrap;
+}
+.hd-stars {
+  color: var(--c-gold);
+  letter-spacing: 2px;
+  font-size: 18px;
+}
+.hd-score {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 26px;
+  color: var(--c-ink);
+}
+
+/* Grid */
+.hd-grid {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 40px;
+  align-items: start;
+}
+.hd-block {
+  margin-bottom: 34px;
+}
+.hd-block h2 {
+  font-family: var(--font-display);
+  font-size: 23px;
+  color: var(--c-ink);
+  margin: 0 0 14px;
+}
+.hd-block p {
+  color: var(--c-ink-soft);
+  line-height: 1.75;
+  margin: 0;
+}
+.hd-amenities {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 22px;
+}
+.hd-amenity {
+  color: var(--c-ink-soft);
+  font-size: 14.5px;
+}
+.hd-map {
+  width: 100%;
+  height: 300px;
+  border: 0;
+  border-radius: 8px;
+}
+
+/* Reviews */
+.hd-review {
+  border-top: 1px solid #efece6;
+  padding: 16px 0;
+}
+.hd-review-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.hd-review-stars {
+  color: var(--c-gold);
+  letter-spacing: 1px;
+}
+.hd-review-body {
+  margin: 8px 0 0;
+  color: var(--c-ink-soft);
+}
+.hd-review-reply {
+  margin: 8px 0 0;
+  padding: 10px 14px;
+  background: #f4ecdf;
+  border-radius: 6px;
+  font-size: 14px;
+  color: var(--c-ink-soft) !important;
+}
+
+/* Rooms (sidebar) */
+.hd-rooms {
+  position: sticky;
+  top: 90px;
+}
+.hd-rooms > h2 {
+  font-family: var(--font-display);
+  font-size: 23px;
+  color: var(--c-ink);
+  margin: 0 0 16px;
+}
+.hd-room {
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
+  margin-bottom: 18px;
+}
+.hd-room > img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+.hd-room-body {
+  padding: 14px 16px 16px;
+}
+.hd-room-type {
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--c-gold);
+}
+.hd-room-body h3 {
+  font-family: var(--font-display);
+  font-size: 18px;
+  margin: 4px 0 6px;
+  color: var(--c-ink);
+}
+.hd-room-meta {
+  font-size: 13px;
+  color: var(--c-muted);
+  margin: 0 0 12px;
+}
+.hd-room-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+.hd-room-price {
+  font-family: var(--font-display);
+  font-size: 17px;
+  color: var(--c-ink);
+}
+.hd-room-price small {
+  font-family: var(--font-body);
+  font-size: 11.5px;
+  color: var(--c-muted);
+}
+.hd-book-btn {
+  background: var(--c-dark);
+  color: #fff;
+  border: none;
+  padding: 9px 18px;
+  border-radius: 5px;
+  font-size: 13px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+.hd-book-btn:hover:not(:disabled) {
+  background: var(--c-gold);
+}
+.hd-book-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Booking modal summary */
+.bm-summary {
+  background: var(--c-cream);
+  border-radius: 8px;
+  padding: 16px 18px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .hd-grid {
+    grid-template-columns: 1fr;
+  }
+  .hd-rooms {
+    position: static;
+  }
+}
