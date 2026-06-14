@@ -8,6 +8,10 @@ export function createUser(data) {
   return axiosClient.post('/users', data)
 }
 
+export function getUserById(id) {
+  return axiosClient.get(`/users/${id}`)
+}
+
 export function updateUser(id, data) {
   return axiosClient.patch(`/users/${id}`, data)
 }

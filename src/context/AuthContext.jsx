@@ -31,6 +31,9 @@ export function AuthProvider({ children }) {
 
   const logout = () => setUser(null)
 
+  // Cập nhật thông tin user hiện tại (đồng bộ xuống localStorage qua effect)
+  const updateCurrentUser = (partial) => setUser((u) => (u ? { ...u, ...partial } : u))
+
   const value = {
     user,
     isAuthenticated: !!user,
@@ -39,6 +42,7 @@ export function AuthProvider({ children }) {
     isUser: user?.role === 'user',
     login,
     logout,
+    updateCurrentUser,
   }
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
