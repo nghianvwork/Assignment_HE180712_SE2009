@@ -35,7 +35,8 @@ export default function HotelsPage() {
   const [hotels, setHotels] = useState([])
   const [rooms, setRooms] = useState([])
   const [bookings, setBookings] = useState([])
-  const [q, setQ] = useState(params.get('city') || '')
+  const [q, setQ] = useState('')
+  const [city, setCity] = useState(params.get('city') || '')
   const [priceMax, setPriceMax] = useState(0)
   const [minRating, setMinRating] = useState(0)
   const [amenitySel, setAmenitySel] = useState([])
@@ -62,6 +63,7 @@ export default function HotelsPage() {
   })
   const allAmenities = [...new Set(hotels.flatMap((h) => h.amenities || []))]
   const allRoomTypes = [...new Set(rooms.map((r) => r.type))]
+  const allCities = [...new Set(hotels.map((h) => h.city).filter(Boolean))]
   const minPriceOf = (id) => {
     const rs = roomsByHotel[id] || []
     return rs.length ? Math.min(...rs.map((r) => r.price)) : 0
@@ -70,6 +72,7 @@ export default function HotelsPage() {
   let list = hotels.filter((h) => {
     const kw = q.trim().toLowerCase()
     if (kw && ![h.name, h.city, h.address].some((v) => v?.toLowerCase().includes(kw))) return false
+    if (city && h.city !== city) return false
     if (priceMax && minPriceOf(h.id) > priceMax) return false
     if (minRating && (h.rating || 0) < minRating) return false
     if (amenitySel.length && !amenitySel.every((a) => (h.amenities || []).includes(a))) return false
@@ -86,6 +89,7 @@ export default function HotelsPage() {
   const toggleAmenity = (a) =>
     setAmenitySel((s) => (s.includes(a) ? s.filter((x) => x !== a) : [...s, a]))
   const clearFilters = () => {
+    setCity('')
     setPriceMax(0)
     setMinRating(0)
     setAmenitySel([])
@@ -122,6 +126,18 @@ export default function HotelsPage() {
           <div className="hp-filter-head">
             <h3>Bộ lọc</h3>
             <button onClick={clearFilters}>Xóa lọc</button>
+          </div>
+
+          <div className="hp-fgroup">
+            <label>Thành phố</label>
+            <select value={city} onChange={(e) => setCity(e.target.value)}>
+              <option value="">Mọi thành phố</option>
+              {allCities.map((c) => (
+                <option key={c} value={c}>
+                  {c}
+                </option>
+              ))}
+            </select>
           </div>
 
           <div className="hp-fgroup">

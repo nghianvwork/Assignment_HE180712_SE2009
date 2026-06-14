@@ -66,6 +66,9 @@ export default function HomePage() {
     }
   }, [])
 
+  // Danh sách điểm đến lấy từ dữ liệu khách sạn (không hardcode)
+  const cities = [...new Set(hotels.map((h) => h.city).filter(Boolean))]
+
   const handleSearch = (e) => {
     e.preventDefault()
     const params = new URLSearchParams()
@@ -109,9 +112,11 @@ export default function HomePage() {
               onChange={(e) => setSearch((s) => ({ ...s, city: e.target.value }))}
             >
               <option value="">Mọi điểm đến</option>
-              <option>Nha Trang</option>
-              <option>Hồ Chí Minh</option>
-              <option>Hà Nội</option>
+              {cities.map((c) => (
+                <option key={c} value={c}>
+                  {c}
+                </option>
+              ))}
             </select>
           </div>
           <div className="hs-divider" />
