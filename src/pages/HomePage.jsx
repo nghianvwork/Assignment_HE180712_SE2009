@@ -46,7 +46,7 @@ export default function HomePage() {
       .then(([h, r, rv, u]) => {
         if (!active) return
         setHotels(h)
-        setRooms(r.slice(0, 3))
+        setRooms(r.slice(0, 4))
         setReviews(rv)
         setUsers(u)
       })
@@ -181,7 +181,7 @@ export default function HomePage() {
         </div>
 
         <div className="collection-grid">
-          {hotels.slice(0, 3).map((hotel, i) => (
+          {hotels.slice(0, 4).map((hotel, i) => (
             <Reveal
               key={hotel.id}
               className="collection-card"

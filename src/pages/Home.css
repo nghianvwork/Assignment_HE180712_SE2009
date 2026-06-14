@@ -274,8 +274,8 @@
 /* ===== Collection cards ===== */
 .collection-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 34px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
 }
 .collection-card {
   background: #fff;
@@ -355,8 +355,8 @@
 /* ===== Room cards ===== */
 .room-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 34px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
 }
 .room-card {
   background: #fff;
@@ -639,6 +639,17 @@
   }
   .section {
     padding: 70px 24px;
+  }
+  .collection-grid,
+  .room-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .collection-grid,
+  .room-grid {
+    grid-template-columns: 1fr;
   }
 }
 
