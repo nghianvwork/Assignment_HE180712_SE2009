@@ -60,6 +60,15 @@
       "city": "Nha Trang",
       "image": "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=80",
       "description": "Khu nghỉ dưỡng 5 sao ven biển với hồ bơi vô cực và bãi biển riêng.",
+      "amenities": [
+        "Hồ bơi vô cực",
+        "Bãi biển riêng",
+        "Spa",
+        "Phòng gym",
+        "Nhà hàng",
+        "WiFi miễn phí"
+      ],
+      "policy": "Nhận phòng 14:00, trả phòng 12:00. Miễn phí hủy trước 3 ngày. Không hút thuốc trong phòng.",
       "rating": 4.8,
       "status": "active"
     },
@@ -71,6 +80,14 @@
       "city": "Hồ Chí Minh",
       "image": "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=800&q=80",
       "description": "Khách sạn trung tâm thành phố, thuận tiện di chuyển và mua sắm.",
+      "amenities": [
+        "WiFi miễn phí",
+        "Nhà hàng",
+        "Quầy bar",
+        "Phòng họp",
+        "Đỗ xe"
+      ],
+      "policy": "Nhận phòng 14:00, trả phòng 12:00. Hủy miễn phí trước 1 ngày. Cho phép thú cưng nhỏ.",
       "rating": 4.5,
       "status": "active"
     },
@@ -82,8 +99,34 @@
       "city": "Hà Nội",
       "image": "https://images.unsplash.com/photo-1564501049412-61c2a3083791?w=800&q=80",
       "description": "Khách sạn mang phong cách cổ điển giữa lòng phố cổ Hà Nội.",
+      "amenities": [
+        "WiFi miễn phí",
+        "Nhà hàng",
+        "Lễ tân 24/7",
+        "Tour du lịch",
+        "Cho thuê xe đạp"
+      ],
+      "policy": "Nhận phòng 14:00, trả phòng 12:00. Hủy miễn phí trước 2 ngày. Không hút thuốc.",
       "rating": 4.6,
       "status": "active"
+    },
+    {
+      "id": "4",
+      "name": "Da Lat Pine Hill Hotel",
+      "ownerId": "3",
+      "address": "9 Trần Hưng Đạo, Phường 10, Đà Lạt, Lâm Đồng",
+      "city": "Đà Lạt",
+      "image": "https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800&q=80",
+      "description": "Khách sạn nằm trên đồi thông, không khí trong lành, view thành phố Đà Lạt.",
+      "amenities": [
+        "WiFi miễn phí",
+        "Lò sưởi",
+        "Nhà hàng",
+        "Đỗ xe"
+      ],
+      "policy": "Nhận phòng 14:00, trả phòng 12:00. Hủy miễn phí trước 2 ngày.",
+      "rating": 4.4,
+      "status": "pending"
     }
   ],
   "rooms": [
