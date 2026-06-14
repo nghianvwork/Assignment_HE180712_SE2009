@@ -334,6 +334,28 @@
       "active": true
     }
   ],
+  "reviews": [
+    {
+      "id": "1",
+      "hotelId": "1",
+      "userId": "4",
+      "bookingId": "1",
+      "rating": 5,
+      "comment": "Phòng đẹp, view biển tuyệt vời, nhân viên phục vụ chu đáo!",
+      "reply": "",
+      "createdAt": "2026-06-13T10:00:00.000Z"
+    },
+    {
+      "id": "2",
+      "hotelId": "2",
+      "userId": "4",
+      "bookingId": "4",
+      "rating": 4,
+      "comment": "Vị trí trung tâm, thuận tiện đi lại. Buffet sáng ngon.",
+      "reply": "Cảm ơn quý khách đã ghé thăm, rất mong được đón tiếp lần sau!",
+      "createdAt": "2026-06-08T15:30:00.000Z"
+    }
+  ],
   "bookings": [
     {
       "id": "1",
