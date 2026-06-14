@@ -27,11 +27,39 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   min-height: 100vh;
   font-family: var(--font-body);
+  color: var(--c-ink);
   background: var(--c-cream);
+  letter-spacing: 0.1px;
+}
+
+/* Liên kết & nút có nhịp chuyển động mượt mặc định */
+a,
+button {
+  transition: color 0.3s var(--ease-lux), background-color 0.3s var(--ease-lux),
+    border-color 0.3s var(--ease-lux), transform 0.3s var(--ease-lux),
+    box-shadow 0.3s var(--ease-lux), opacity 0.3s var(--ease-lux);
+}
+
+/* Tôn trọng người dùng tắt hiệu ứng chuyển động */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
 }
 
 #root {
