@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react'
-import { Table, Form, Button } from 'react-bootstrap'
+import { Table, Form, Button, Modal, Row, Col } from 'react-bootstrap'
 import { toast } from 'react-toastify'
 import { useAuth } from '../../context/AuthContext'
-import { getUsers, updateUser, deleteUser } from '../../services/userService'
+import { getUsers, createUser, updateUser, deleteUser } from '../../services/userService'
 import ConfirmModal from '../../components/ConfirmModal'
+import FormField from '../../components/FormField'
 
 const ROLES = [
   { value: 'user', label: 'Khách hàng' },
@@ -11,12 +12,23 @@ const ROLES = [
   { value: 'admin', label: 'Quản trị' },
 ]
 
-/** Quản lý tài khoản: tìm kiếm, phân vai trò, khóa/mở, xóa */
+const EMPTY = {
+  username: '',
+  password: '',
+  fullName: '',
+  email: '',
+  phone: '',
+  role: 'user',
+  status: 'active',
+}
+
+/** Quản lý tài khoản: CRUD, tìm kiếm, phân vai trò, khóa/mở */
 export default function AdminUsers() {
   const { user: me } = useAuth()
   const [users, setUsers] = useState([])
   const [keyword, setKeyword] = useState('')
   const [roleFilter, setRoleFilter] = useState('')
+  const [editing, setEditing] = useState(null) // null | {id?, ...form}
   const [deleting, setDeleting] = useState(null)
 
   const reload = () =>
@@ -27,6 +39,8 @@ export default function AdminUsers() {
   useEffect(() => {
     reload()
   }, [])
+
+  const set = (key, value) => setEditing((f) => ({ ...f, [key]: value }))
 
   const handleRoleChange = async (u, role) => {
     try {
@@ -46,6 +60,36 @@ export default function AdminUsers() {
       reload()
     } catch {
       toast.error('Cập nhật trạng thái thất bại')
+    }
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+    try {
+      if (editing.id) {
+        // Cập nhật: chỉ đổi mật khẩu nếu có nhập mới
+        const payload = {
+          fullName: editing.fullName,
+          email: editing.email,
+          phone: editing.phone,
+          role: editing.role,
+        }
+        if (editing.password) payload.password = editing.password
+        await updateUser(editing.id, payload)
+        toast.success('Đã cập nhật tài khoản')
+      } else {
+        const dup = users.some((u) => u.username === editing.username.trim())
+        if (dup) {
+          toast.error('Username đã tồn tại')
+          return
+        }
+        await createUser({ ...editing, username: editing.username.trim() })
+        toast.success('Đã tạo tài khoản mới')
+      }
+      setEditing(null)
+      reload()
+    } catch {
+      toast.error('Lưu tài khoản thất bại')
     }
   }
 
@@ -75,6 +119,9 @@ export default function AdminUsers() {
           Tài khoản
           <small>{users.length} tài khoản trong hệ thống</small>
         </h1>
+        <button className="admin-btn-primary" onClick={() => setEditing({ ...EMPTY })}>
+          + Thêm tài khoản
+        </button>
       </div>
 
       <div className="admin-filters">
@@ -140,6 +187,14 @@ export default function AdminUsers() {
                   <td className="text-end">
                     <Button
                       size="sm"
+                      variant="outline-secondary"
+                      className="me-2"
+                      onClick={() => setEditing({ ...EMPTY, ...u, password: '' })}
+                    >
+                      Sửa
+                    </Button>
+                    <Button
+                      size="sm"
                       variant={u.status === 'banned' ? 'outline-success' : 'outline-warning'}
                       disabled={isMe}
                       onClick={() => handleToggleStatus(u)}
@@ -169,6 +224,88 @@ export default function AdminUsers() {
           </tbody>
         </Table>
       </div>
+
+      {/* Modal thêm / sửa */}
+      <Modal show={!!editing} onHide={() => setEditing(null)} centered>
+        <Form onSubmit={handleSubmit}>
+          <Modal.Header closeButton>
+            <Modal.Title className="fs-5">
+              {editing?.id ? 'Cập nhật tài khoản' : 'Thêm tài khoản mới'}
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <Row>
+              <Col md={6}>
+                <FormField label="Username">
+                  <Form.Control
+                    required
+                    disabled={!!editing?.id}
+                    value={editing?.username || ''}
+                    onChange={(e) => set('username', e.target.value)}
+                  />
+                </FormField>
+              </Col>
+              <Col md={6}>
+                <FormField label={editing?.id ? 'Mật khẩu mới (bỏ trống nếu giữ nguyên)' : 'Mật khẩu'}>
+                  <Form.Control
+                    type="password"
+                    required={!editing?.id}
+                    value={editing?.password || ''}
+                    onChange={(e) => set('password', e.target.value)}
+                  />
+                </FormField>
+              </Col>
+            </Row>
+            <FormField label="Họ tên">
+              <Form.Control
+                required
+                value={editing?.fullName || ''}
+                onChange={(e) => set('fullName', e.target.value)}
+              />
+            </FormField>
+            <Row>
+              <Col md={7}>
+                <FormField label="Email">
+                  <Form.Control
+                    required
+                    type="email"
+                    value={editing?.email || ''}
+                    onChange={(e) => set('email', e.target.value)}
+                  />
+                </FormField>
+              </Col>
+              <Col md={5}>
+                <FormField label="Số điện thoại">
+                  <Form.Control
+                    value={editing?.phone || ''}
+                    onChange={(e) => set('phone', e.target.value)}
+                  />
+                </FormField>
+              </Col>
+            </Row>
+            <FormField label="Vai trò">
+              <Form.Select
+                value={editing?.role || 'user'}
+                onChange={(e) => set('role', e.target.value)}
+              >
+                {ROLES.map((r) => (
+                  <option key={r.value} value={r.value}>
+                    {r.label}
+                  </option>
+                ))}
+              </Form.Select>
+            </FormField>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="outline-secondary" onClick={() => setEditing(null)}>
+              Hủy bỏ
+            </Button>
+            <Button type="submit" variant="dark">
+              {editing?.id ? 'Lưu thay đổi' : 'Tạo mới'}
+            </Button>
+          </Modal.Footer>
+        </Form>
+      </Modal>
 
       <ConfirmModal
         show={!!deleting}
