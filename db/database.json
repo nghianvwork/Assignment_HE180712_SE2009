@@ -246,6 +246,672 @@
         "TV",
         "Bàn làm việc"
       ]
+    },
+    {
+      "id": "7",
+      "hotelId": "1",
+      "name": "Phòng Standard Hướng Biển",
+      "type": "Standard",
+      "price": 660000,
+      "image": "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=800&q=80",
+      "description": "Phòng tiêu chuẩn ấm cúng, đầy đủ tiện nghi cơ bản.",
+      "capacity": 2,
+      "bedType": "1 giường đôi",
+      "size": 24,
+      "available": true,
+      "amenities": [
+        "WiFi miễn phí",
+        "Điều hòa",
+        "TV màn hình phẳng",
+        "Tủ lạnh mini"
+      ]
+    },
+    {
+      "id": "8",
+      "hotelId": "1",
+      "name": "Phòng Superior Tầng Cao",
+      "type": "Superior",
+      "price": 1020000,
+      "image": "https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=800&q=80",
+      "description": "Phòng rộng rãi hiện đại, lý tưởng cho khách công tác.",
+      "capacity": 2,
+      "bedType": "2 giường đơn",
+      "size": 30,
+      "available": true,
+      "amenities": [
+        "WiFi miễn phí",
+        "Điều hòa",
+        "Bàn làm việc",
+        "Két sắt"
+      ]
+    },
+    {
+      "id": "9",
+      "hotelId": "1",
+      "name": "Phòng Deluxe Yên Tĩnh",
+      "type": "Deluxe",
+      "price": 1560000,
+      "image": "https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=800&q=80",
+      "description": "Phòng cao cấp với ban công riêng và nội thất sang trọng.",
+      "capacity": 3,
+      "bedType": "1 giường King",
+      "size": 36,
+      "available": true,
+      "amenities": [
+        "WiFi miễn phí",
+        "Điều hòa",
+        "Smart TV",
+        "Minibar",
+        "Ban công"
+      ]
+    },
+    {
+      "id": "10",
+      "hotelId": "1",
+      "name": "Phòng Family Góc",
+      "type": "Family",
+      "price": 1920000,
+      "image": "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=80",
+      "description": "Phòng gia đình rộng thoáng, phù hợp nhóm khách và trẻ em.",
+      "capacity": 4,
+      "bedType": "1 giường King + 1 giường đôi",
+      "size": 48,
+      "available": true,
+      "amenities": [
+        "WiFi miễn phí",
+        "Điều hòa",
+        "Smart TV",
+        "Bếp nhỏ",
+        "Sofa"
+      ]
+    },
+    {
+      "id": "11",
+      "hotelId": "1",
+      "name": "Phòng Suite Hướng Hồ",
+      "type": "Suite",
+      "price": 3000000,
+      "image": "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800&q=80",
+      "description": "Suite đẳng cấp với phòng khách riêng và tầm nhìn đẹp.",
+      "capacity": 4,
+      "bedType": "1 giường King",
+      "size": 60,
+      "available": true,
+      "amenities": [
+        "WiFi miễn phí",
+        "Jacuzzi",
+        "Phòng khách",
+        "Minibar",
+        "Ban công"
+      ]
+    },
+    {
+      "id": "12",
+      "hotelId": "1",
+      "name": "Phòng Standard Trung Tâm",
+      "type": "Standard",
+      "price": 660000,
+      "image": "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800&q=80",
+      "description": "Phòng tiêu chuẩn ấm cúng, đầy đủ tiện nghi cơ bản.",
+      "capacity": 2,
+      "bedType": "1 giường đôi",
+      "size": 24,
+      "available": false,
+      "amenities": [
+        "WiFi miễn phí",
+        "Điều hòa",
+        "TV màn hình phẳng",
+        "Tủ lạnh mini"
+      ]
+    },
+    {
+      "id": "13",
+      "hotelId": "1",
+      "name": "Phòng Superior Hướng Vườn",
+      "type": "Superior",
+      "price": 1020000,
+      "image": "https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=800&q=80",
+      "description": "Phòng rộng rãi hiện đại, lý tưởng cho khách công tác.",
+      "capacity": 2,
+      "bedType": "2 giường đơn",
+      "size": 30,
+      "available": true,
+      "amenities": [
+        "WiFi miễn phí",
+        "Điều hòa",
+        "Bàn làm việc",
+        "Két sắt"
+      ]
+    },
+    {
+      "id": "14",
+      "hotelId": "1",
+      "name": "Phòng Deluxe Hướng Phố",
+      "type": "Deluxe",
+      "price": 1560000,
+      "image": "https://images.unsplash.com/photo-1591088398332-8a7791972843?w=800&q=80",
+      "description": "Phòng cao cấp với ban công riêng và nội thất sang trọng.",
+      "capacity": 3,
+      "bedType": "1 giường King",
+      "size": 36,
+      "available": true,
+      "amenities": [
+        "WiFi miễn phí",
+        "Điều hòa",
+        "Smart TV",
+        "Minibar",
+        "Ban công"
+      ]
+    },
+    {
+      "id": "15",
+      "hotelId": "2",
+      "name": "Phòng Family Hướng Biển",
+      "type": "Family",
+      "price": 1800000,
+      "image": "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&q=80",
+      "description": "Phòng gia đình rộng thoáng, phù hợp nhóm khách và trẻ em.",
+      "capacity": 4,
+      "bedType": "1 giường King + 1 giường đôi",
+      "size": 48,
+      "available": true,
+      "amenities": [
+        "WiFi miễn phí",
+        "Điều hòa",
+        "Smart TV",
+        "Bếp nhỏ",
+        "Sofa"
+      ]
+    },
+    {
+      "id": "16",
+      "hotelId": "2",
+      "name": "Phòng Suite Tầng Cao",
+      "type": "Suite",
+      "price": 2810000,
+      "image": "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&q=80",
+      "description": "Suite đẳng cấp với phòng khách riêng và tầm nhìn đẹp.",
+      "capacity": 4,
+      "bedType": "1 giường King",
+      "size": 60,
+      "available": true,
+      "amenities": [
+        "WiFi miễn phí",
+        "Jacuzzi",
+        "Phòng khách",
+        "Minibar",
+        "Ban công"
+      ]
+    },
+    {
+      "id": "17",
+      "hotelId": "2",
+      "name": "Phòng Standard Yên Tĩnh",
+      "type": "Standard",
+      "price": 620000,
+      "image": "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=800&q=80",
+      "description": "Phòng tiêu chuẩn ấm cúng, đầy đủ tiện nghi cơ bản.",
+      "capacity": 2,
+      "bedType": "1 giường đôi",
+      "size": 24,
+      "available": true,
+      "amenities": [
+        "WiFi miễn phí",
+        "Điều hòa",
+        "TV màn hình phẳng",
+        "Tủ lạnh mini"
+      ]
+    },
+    {
+      "id": "18",
+      "hotelId": "2",
+      "name": "Phòng Superior Góc",
+      "type": "Superior",
+      "price": 960000,
+      "image": "https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=800&q=80",
+      "description": "Phòng rộng rãi hiện đại, lý tưởng cho khách công tác.",
+      "capacity": 2,
+      "bedType": "2 giường đơn",
+      "size": 30,
+      "available": true,
+      "amenities": [
+        "WiFi miễn phí",
+        "Điều hòa",
+        "Bàn làm việc",
+        "Két sắt"
+      ]
+    },
+    {
+      "id": "19",
+      "hotelId": "2",
+      "name": "Phòng Deluxe Hướng Hồ",
+      "type": "Deluxe",
+      "price": 1460000,
+      "image": "https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=800&q=80",
+      "description": "Phòng cao cấp với ban công riêng và nội thất sang trọng.",
+      "capacity": 3,
+      "bedType": "1 giường King",
+      "size": 36,
+      "available": true,
+      "amenities": [
+        "WiFi miễn phí",
+        "Điều hòa",
+        "Smart TV",
+        "Minibar",
+        "Ban công"
+      ]
+    },
+    {
+      "id": "20",
+      "hotelId": "2",
+      "name": "Phòng Family Trung Tâm",
+      "type": "Family",
+      "price": 1800000,
+      "image": "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=80",
+      "description": "Phòng gia đình rộng thoáng, phù hợp nhóm khách và trẻ em.",
+      "capacity": 4,
+      "bedType": "1 giường King + 1 giường đôi",
+      "size": 48,
+      "available": false,
+      "amenities": [
+        "WiFi miễn phí",
+        "Điều hòa",
+        "Smart TV",
+        "Bếp nhỏ",
+        "Sofa"
+      ]
+    },
+    {
+      "id": "21",
+      "hotelId": "2",
+      "name": "Phòng Suite Hướng Vườn",
+      "type": "Suite",
+      "price": 2810000,
+      "image": "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800&q=80",
+      "description": "Suite đẳng cấp với phòng khách riêng và tầm nhìn đẹp.",
+      "capacity": 4,
+      "bedType": "1 giường King",
+      "size": 60,
+      "available": true,
+      "amenities": [
+        "WiFi miễn phí",
+        "Jacuzzi",
+        "Phòng khách",
+        "Minibar",
+        "Ban công"
+      ]
+    },
+    {
+      "id": "22",
+      "hotelId": "2",
+      "name": "Phòng Standard Hướng Phố",
+      "type": "Standard",
+      "price": 620000,
+      "image": "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800&q=80",
+      "description": "Phòng tiêu chuẩn ấm cúng, đầy đủ tiện nghi cơ bản.",
+      "capacity": 2,
+      "bedType": "1 giường đôi",
+      "size": 24,
+      "available": true,
+      "amenities": [
+        "WiFi miễn phí",
+        "Điều hòa",
+        "TV màn hình phẳng",
+        "Tủ lạnh mini"
+      ]
+    },
+    {
+      "id": "23",
+      "hotelId": "3",
+      "name": "Phòng Superior Hướng Biển",
+      "type": "Superior",
+      "price": 980000,
+      "image": "https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=800&q=80",
+      "description": "Phòng rộng rãi hiện đại, lý tưởng cho khách công tác.",
+      "capacity": 2,
+      "bedType": "2 giường đơn",
+      "size": 30,
+      "available": true,
+      "amenities": [
+        "WiFi miễn phí",
+        "Điều hòa",
+        "Bàn làm việc",
+        "Két sắt"
+      ]
+    },
+    {
+      "id": "24",
+      "hotelId": "3",
+      "name": "Phòng Deluxe Tầng Cao",
+      "type": "Deluxe",
+      "price": 1500000,
+      "image": "https://images.unsplash.com/photo-1591088398332-8a7791972843?w=800&q=80",
+      "description": "Phòng cao cấp với ban công riêng và nội thất sang trọng.",
+      "capacity": 3,
+      "bedType": "1 giường King",
+      "size": 36,
+      "available": true,
+      "amenities": [
+        "WiFi miễn phí",
+        "Điều hòa",
+        "Smart TV",
+        "Minibar",
+        "Ban công"
+      ]
+    },
+    {
+      "id": "25",
+      "hotelId": "3",
+      "name": "Phòng Family Yên Tĩnh",
+      "type": "Family",
+      "price": 1840000,
+      "image": "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&q=80",
+      "description": "Phòng gia đình rộng thoáng, phù hợp nhóm khách và trẻ em.",
+      "capacity": 4,
+      "bedType": "1 giường King + 1 giường đôi",
+      "size": 48,
+      "available": true,
+      "amenities": [
+        "WiFi miễn phí",
+        "Điều hòa",
+        "Smart TV",
+        "Bếp nhỏ",
+        "Sofa"
+      ]
+    },
+    {
+      "id": "26",
+      "hotelId": "3",
+      "name": "Phòng Suite Góc",
+      "type": "Suite",
+      "price": 2880000,
+      "image": "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&q=80",
+      "description": "Suite đẳng cấp với phòng khách riêng và tầm nhìn đẹp.",
+      "capacity": 4,
+      "bedType": "1 giường King",
+      "size": 60,
+      "available": true,
+      "amenities": [
+        "WiFi miễn phí",
+        "Jacuzzi",
+        "Phòng khách",
+        "Minibar",
+        "Ban công"
+      ]
+    },
+    {
+      "id": "27",
+      "hotelId": "3",
+      "name": "Phòng Standard Hướng Hồ",
+      "type": "Standard",
+      "price": 630000,
+      "image": "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=800&q=80",
+      "description": "Phòng tiêu chuẩn ấm cúng, đầy đủ tiện nghi cơ bản.",
+      "capacity": 2,
+      "bedType": "1 giường đôi",
+      "size": 24,
+      "available": true,
+      "amenities": [
+        "WiFi miễn phí",
+        "Điều hòa",
+        "TV màn hình phẳng",
+        "Tủ lạnh mini"
+      ]
+    },
+    {
+      "id": "28",
+      "hotelId": "3",
+      "name": "Phòng Superior Trung Tâm",
+      "type": "Superior",
+      "price": 980000,
+      "image": "https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=800&q=80",
+      "description": "Phòng rộng rãi hiện đại, lý tưởng cho khách công tác.",
+      "capacity": 2,
+      "bedType": "2 giường đơn",
+      "size": 30,
+      "available": false,
+      "amenities": [
+        "WiFi miễn phí",
+        "Điều hòa",
+        "Bàn làm việc",
+        "Két sắt"
+      ]
+    },
+    {
+      "id": "29",
+      "hotelId": "3",
+      "name": "Phòng Deluxe Hướng Vườn",
+      "type": "Deluxe",
+      "price": 1500000,
+      "image": "https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=800&q=80",
+      "description": "Phòng cao cấp với ban công riêng và nội thất sang trọng.",
+      "capacity": 3,
+      "bedType": "1 giường King",
+      "size": 36,
+      "available": true,
+      "amenities": [
+        "WiFi miễn phí",
+        "Điều hòa",
+        "Smart TV",
+        "Minibar",
+        "Ban công"
+      ]
+    },
+    {
+      "id": "30",
+      "hotelId": "3",
+      "name": "Phòng Family Hướng Phố",
+      "type": "Family",
+      "price": 1840000,
+      "image": "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=80",
+      "description": "Phòng gia đình rộng thoáng, phù hợp nhóm khách và trẻ em.",
+      "capacity": 4,
+      "bedType": "1 giường King + 1 giường đôi",
+      "size": 48,
+      "available": true,
+      "amenities": [
+        "WiFi miễn phí",
+        "Điều hòa",
+        "Smart TV",
+        "Bếp nhỏ",
+        "Sofa"
+      ]
+    },
+    {
+      "id": "31",
+      "hotelId": "4",
+      "name": "Phòng Suite Hướng Vườn",
+      "type": "Suite",
+      "price": 2750000,
+      "image": "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?w=800&q=80",
+      "description": "Suite đẳng cấp với phòng khách riêng và tầm nhìn đẹp.",
+      "capacity": 4,
+      "bedType": "1 giường King",
+      "size": 60,
+      "available": false,
+      "amenities": [
+        "WiFi miễn phí",
+        "Jacuzzi",
+        "Phòng khách",
+        "Minibar",
+        "Ban công"
+      ]
+    },
+    {
+      "id": "32",
+      "hotelId": "4",
+      "name": "Phòng Standard Hướng Phố",
+      "type": "Standard",
+      "price": 610000,
+      "image": "https://images.unsplash.com/photo-1590490360182-c33d57733427?w=800&q=80",
+      "description": "Phòng tiêu chuẩn ấm cúng, đầy đủ tiện nghi cơ bản.",
+      "capacity": 2,
+      "bedType": "1 giường đôi",
+      "size": 24,
+      "available": true,
+      "amenities": [
+        "WiFi miễn phí",
+        "Điều hòa",
+        "TV màn hình phẳng",
+        "Tủ lạnh mini"
+      ]
+    },
+    {
+      "id": "33",
+      "hotelId": "4",
+      "name": "Phòng Superior Hướng Biển",
+      "type": "Superior",
+      "price": 940000,
+      "image": "https://images.unsplash.com/photo-1618773928121-c32242e63f39?w=800&q=80",
+      "description": "Phòng rộng rãi hiện đại, lý tưởng cho khách công tác.",
+      "capacity": 2,
+      "bedType": "2 giường đơn",
+      "size": 30,
+      "available": true,
+      "amenities": [
+        "WiFi miễn phí",
+        "Điều hòa",
+        "Bàn làm việc",
+        "Két sắt"
+      ]
+    },
+    {
+      "id": "34",
+      "hotelId": "4",
+      "name": "Phòng Deluxe Tầng Cao",
+      "type": "Deluxe",
+      "price": 1430000,
+      "image": "https://images.unsplash.com/photo-1591088398332-8a7791972843?w=800&q=80",
+      "description": "Phòng cao cấp với ban công riêng và nội thất sang trọng.",
+      "capacity": 3,
+      "bedType": "1 giường King",
+      "size": 36,
+      "available": true,
+      "amenities": [
+        "WiFi miễn phí",
+        "Điều hòa",
+        "Smart TV",
+        "Minibar",
+        "Ban công"
+      ]
+    },
+    {
+      "id": "35",
+      "hotelId": "4",
+      "name": "Phòng Family Yên Tĩnh",
+      "type": "Family",
+      "price": 1760000,
+      "image": "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?w=800&q=80",
+      "description": "Phòng gia đình rộng thoáng, phù hợp nhóm khách và trẻ em.",
+      "capacity": 4,
+      "bedType": "1 giường King + 1 giường đôi",
+      "size": 48,
+      "available": true,
+      "amenities": [
+        "WiFi miễn phí",
+        "Điều hòa",
+        "Smart TV",
+        "Bếp nhỏ",
+        "Sofa"
+      ]
+    },
+    {
+      "id": "36",
+      "hotelId": "4",
+      "name": "Phòng Suite Góc",
+      "type": "Suite",
+      "price": 2750000,
+      "image": "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&q=80",
+      "description": "Suite đẳng cấp với phòng khách riêng và tầm nhìn đẹp.",
+      "capacity": 4,
+      "bedType": "1 giường King",
+      "size": 60,
+      "available": true,
+      "amenities": [
+        "WiFi miễn phí",
+        "Jacuzzi",
+        "Phòng khách",
+        "Minibar",
+        "Ban công"
+      ]
+    },
+    {
+      "id": "37",
+      "hotelId": "4",
+      "name": "Phòng Standard Hướng Hồ",
+      "type": "Standard",
+      "price": 610000,
+      "image": "https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=800&q=80",
+      "description": "Phòng tiêu chuẩn ấm cúng, đầy đủ tiện nghi cơ bản.",
+      "capacity": 2,
+      "bedType": "1 giường đôi",
+      "size": 24,
+      "available": true,
+      "amenities": [
+        "WiFi miễn phí",
+        "Điều hòa",
+        "TV màn hình phẳng",
+        "Tủ lạnh mini"
+      ]
+    },
+    {
+      "id": "38",
+      "hotelId": "4",
+      "name": "Phòng Superior Trung Tâm",
+      "type": "Superior",
+      "price": 940000,
+      "image": "https://images.unsplash.com/photo-1611892440504-42a792e24d32?w=800&q=80",
+      "description": "Phòng rộng rãi hiện đại, lý tưởng cho khách công tác.",
+      "capacity": 2,
+      "bedType": "2 giường đơn",
+      "size": 30,
+      "available": false,
+      "amenities": [
+        "WiFi miễn phí",
+        "Điều hòa",
+        "Bàn làm việc",
+        "Két sắt"
+      ]
+    },
+    {
+      "id": "39",
+      "hotelId": "4",
+      "name": "Phòng Deluxe Hướng Vườn",
+      "type": "Deluxe",
+      "price": 1430000,
+      "image": "https://images.unsplash.com/photo-1566665797739-1674de7a421a?w=800&q=80",
+      "description": "Phòng cao cấp với ban công riêng và nội thất sang trọng.",
+      "capacity": 3,
+      "bedType": "1 giường King",
+      "size": 36,
+      "available": true,
+      "amenities": [
+        "WiFi miễn phí",
+        "Điều hòa",
+        "Smart TV",
+        "Minibar",
+        "Ban công"
+      ]
+    },
+    {
+      "id": "40",
+      "hotelId": "4",
+      "name": "Phòng Family Hướng Phố",
+      "type": "Family",
+      "price": 1760000,
+      "image": "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=80",
+      "description": "Phòng gia đình rộng thoáng, phù hợp nhóm khách và trẻ em.",
+      "capacity": 4,
+      "bedType": "1 giường King + 1 giường đôi",
+      "size": 48,
+      "available": true,
+      "amenities": [
+        "WiFi miễn phí",
+        "Điều hòa",
+        "Smart TV",
+        "Bếp nhỏ",
+        "Sofa"
+      ]
     }
   ],
   "services": [
@@ -356,7 +1022,14 @@
       "createdAt": "2026-06-08T15:30:00.000Z"
     }
   ],
-  "wishlist": [],
+  "wishlist": [
+    {
+      "userId": "4",
+      "hotelId": "1",
+      "createdAt": "2026-06-14T16:17:17.170Z",
+      "id": "ZkHRJDmXuNU"
+    }
+  ],
   "bookings": [
     {
       "id": "1",
