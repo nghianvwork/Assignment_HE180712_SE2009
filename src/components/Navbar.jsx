@@ -55,9 +55,14 @@ export default function Navbar() {
                   Quản lý
                 </Link>
               ) : (
-                <Link to="/account/bookings" className="lux-nav-btn ghost">
-                  Đặt phòng của tôi
-                </Link>
+                <>
+                  <Link to="/account/wishlist" className="lux-nav-btn ghost">
+                    ♥ Yêu thích
+                  </Link>
+                  <Link to="/account/bookings" className="lux-nav-btn ghost">
+                    Đặt phòng của tôi
+                  </Link>
+                </>
               )}
               <button className="lux-nav-btn" onClick={handleLogout}>
                 Đăng xuất

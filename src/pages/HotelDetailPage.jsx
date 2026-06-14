@@ -12,6 +12,7 @@ import { getUsers } from '../services/userService'
 import { getPricingRules } from '../services/pricingService'
 import { getVouchers } from '../services/voucherService'
 import { getBookings } from '../services/bookingService'
+import { getWishlist, addToWishlist, removeFromWishlist } from '../services/wishlistService'
 import { formatVND } from '../utils/format'
 import './HotelDetail.css'
 
@@ -31,6 +32,7 @@ export default function HotelDetailPage() {
   const [bookings, setBookings] = useState([])
   const [mainImg, setMainImg] = useState('')
   const [activeRoom, setActiveRoom] = useState(null)
+  const [favId, setFavId] = useState(null)
 
   useEffect(() => {
     let active = true
@@ -47,10 +49,36 @@ export default function HotelDetailPage() {
     getVouchers({ hotelId: id }).then((v) => active && setVouchers(v.filter((x) => x.active))).catch(() => {})
     getBookings({ hotelId: id }).then((b) => active && setBookings(b)).catch(() => {})
     getUsers().then((u) => active && setUsers(u)).catch(() => {})
+    if (user?.id) {
+      getWishlist({ userId: user.id, hotelId: id })
+        .then((w) => active && setFavId(w[0]?.id || null))
+        .catch(() => {})
+    }
     return () => {
       active = false
     }
-  }, [id])
+  }, [id, user?.id])
+
+  const toggleFav = async () => {
+    if (!user) return navigate('/login')
+    try {
+      if (favId) {
+        await removeFromWishlist(favId)
+        setFavId(null)
+        toast.info('Đã bỏ khỏi yêu thích')
+      } else {
+        const created = await addToWishlist({
+          userId: user.id,
+          hotelId: id,
+          createdAt: new Date().toISOString(),
+        })
+        setFavId(created.id)
+        toast.success('Đã lưu vào yêu thích')
+      }
+    } catch {
+      toast.error('Thao tác thất bại')
+    }
+  }
 
   if (!hotel) {
     return (
@@ -105,9 +133,18 @@ export default function HotelDetailPage() {
             <h1>{hotel.name}</h1>
             <p className="hd-addr">{hotel.address}</p>
           </div>
-          <div className="hd-rating">
-            <span className="hd-stars">{stars(hotel.rating)}</span>
-            <span className="hd-score">{hotel.rating}</span>
+          <div className="hd-head-right">
+            <button
+              className={`hd-fav ${favId ? 'on' : ''}`}
+              onClick={toggleFav}
+              title={favId ? 'Bỏ yêu thích' : 'Lưu yêu thích'}
+            >
+              {favId ? '♥' : '♡'} Yêu thích
+            </button>
+            <div className="hd-rating">
+              <span className="hd-stars">{stars(hotel.rating)}</span>
+              <span className="hd-score">{hotel.rating}</span>
+            </div>
           </div>
         </header>
 

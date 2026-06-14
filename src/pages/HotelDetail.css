@@ -88,6 +88,31 @@
   color: var(--c-muted);
   margin: 0;
 }
+.hd-head-right {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.hd-fav {
+  background: #fff;
+  border: 1px solid #e0dacf;
+  border-radius: 24px;
+  padding: 9px 18px;
+  font-size: 14px;
+  color: var(--c-ink);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  white-space: nowrap;
+}
+.hd-fav:hover {
+  border-color: var(--c-gold);
+  color: var(--c-gold);
+}
+.hd-fav.on {
+  background: #fdecec;
+  border-color: #e8b4b4;
+  color: #c0392b;
+}
 .hd-rating {
   text-align: right;
   white-space: nowrap;
