@@ -3,10 +3,10 @@ import { Table, Form, Button } from 'react-bootstrap'
 import { toast } from 'react-toastify'
 import { getBookings, updateBooking } from '../../services/bookingService'
 import { getUsers } from '../../services/userService'
-import { getHotels } from '../../services/hotelService'
 import { getRooms } from '../../services/roomService'
 import { formatVND } from '../../utils/format'
 import ConfirmModal from '../../components/ConfirmModal'
+import { useOwnedHotels } from './useOwnedHotels'
 
 const STATUS = {
   pending: { cls: 'amber', label: 'Chờ duyệt' },
@@ -14,26 +14,29 @@ const STATUS = {
   cancelled: { cls: 'red', label: 'Đã hủy' },
 }
 
-/** Quản lý toàn bộ đặt phòng: lọc theo trạng thái, duyệt / hủy */
-export default function AdminBookings() {
+/** Đặt phòng của khách sạn manager sở hữu: xem khách theo từng phòng, duyệt / hủy */
+export default function ManagerBookings() {
+  const { hotels, hotelIds, loading } = useOwnedHotels()
   const [bookings, setBookings] = useState([])
   const [users, setUsers] = useState([])
-  const [hotels, setHotels] = useState([])
   const [rooms, setRooms] = useState([])
   const [statusFilter, setStatusFilter] = useState('')
   const [cancelling, setCancelling] = useState(null)
 
-  const reload = () =>
-    getBookings()
-      .then(setBookings)
+  const reload = () => {
+    const ids = new Set(hotelIds)
+    return getBookings()
+      .then((all) => setBookings(all.filter((b) => ids.has(b.hotelId))))
       .catch(() => toast.error('Không tải được danh sách đặt phòng'))
+  }
 
   useEffect(() => {
+    if (loading) return
     reload()
     getUsers().then(setUsers).catch(() => {})
-    getHotels().then(setHotels).catch(() => {})
     getRooms().then(setRooms).catch(() => {})
-  }, [])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loading, hotels])
 
   const userById = Object.fromEntries(users.map((u) => [u.id, u]))
   const hotelById = Object.fromEntries(hotels.map((h) => [h.id, h]))
@@ -66,7 +69,7 @@ export default function AdminBookings() {
       <div className="admin-head">
         <h1 className="admin-title">
           Đặt phòng
-          <small>{bookings.length} lượt đặt trên toàn hệ thống</small>
+          <small>{bookings.length} lượt đặt — khách theo từng phòng</small>
         </h1>
       </div>
 
@@ -84,8 +87,9 @@ export default function AdminBookings() {
           <thead>
             <tr>
               <th>#</th>
+              <th>Phòng</th>
               <th>Khách hàng</th>
-              <th>Khách sạn / Phòng</th>
+              <th>Khách sạn</th>
               <th>Nhận / Trả phòng</th>
               <th>Khách</th>
               <th>Tổng tiền</th>
@@ -96,17 +100,19 @@ export default function AdminBookings() {
           <tbody>
             {sorted.map((b) => {
               const badge = STATUS[b.status] || STATUS.pending
+              const guest = userById[b.userId]
               return (
                 <tr key={b.id}>
                   <td>{b.id}</td>
                   <td>
-                    <strong>{userById[b.userId]?.fullName || '—'}</strong>
-                    <div className="text-muted small">{userById[b.userId]?.email}</div>
+                    <strong>{roomById[b.roomId]?.name || '—'}</strong>
+                    <div className="text-muted small">{roomById[b.roomId]?.type}</div>
                   </td>
                   <td>
-                    {hotelById[b.hotelId]?.name || '—'}
-                    <div className="text-muted small">{roomById[b.roomId]?.name}</div>
+                    <strong>{guest?.fullName || '—'}</strong>
+                    <div className="text-muted small">{guest?.phone || guest?.email}</div>
                   </td>
+                  <td>{hotelById[b.hotelId]?.name || '—'}</td>
                   <td>
                     {b.checkIn} → {b.checkOut}
                     <div className="text-muted small">{b.nights} đêm</div>
@@ -144,7 +150,7 @@ export default function AdminBookings() {
             })}
             {!sorted.length && (
               <tr>
-                <td colSpan={8} className="text-center text-muted py-4">
+                <td colSpan={9} className="text-center text-muted py-4">
                   Không có đặt phòng nào.
                 </td>
               </tr>

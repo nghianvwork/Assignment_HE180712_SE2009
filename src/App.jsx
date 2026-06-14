@@ -8,9 +8,12 @@ import AdminLayout from './pages/admin/AdminLayout'
 import AdminDashboard from './pages/admin/AdminDashboard'
 import AdminUsers from './pages/admin/AdminUsers'
 import AdminHotels from './pages/admin/AdminHotels'
-import AdminRooms from './pages/admin/AdminRooms'
-import AdminServices from './pages/admin/AdminServices'
-import AdminBookings from './pages/admin/AdminBookings'
+import ManagerLayout from './pages/manager/ManagerLayout'
+import ManagerDashboard from './pages/manager/ManagerDashboard'
+import ManagerRooms from './pages/manager/ManagerRooms'
+import ManagerServices from './pages/manager/ManagerServices'
+import ManagerBookings from './pages/manager/ManagerBookings'
+import ManagerRevenue from './pages/manager/ManagerRevenue'
 
 // Trang tạm cho các khu vực sẽ làm sau
 function Placeholder({ title }) {
@@ -29,7 +32,7 @@ function App() {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/register" element={<RegisterPage />} />
 
-      {/* Khu vực quản trị — chỉ admin */}
+      {/* Khu vực quản trị — admin chỉ quản lý tài khoản & khách sạn */}
       <Route
         path="/admin"
         element={
@@ -41,19 +44,23 @@ function App() {
         <Route index element={<AdminDashboard />} />
         <Route path="users" element={<AdminUsers />} />
         <Route path="hotels" element={<AdminHotels />} />
-        <Route path="rooms" element={<AdminRooms />} />
-        <Route path="services" element={<AdminServices />} />
-        <Route path="bookings" element={<AdminBookings />} />
       </Route>
 
+      {/* Khu quản lý — manager quản lý phòng, dịch vụ, booking, doanh thu của hotel mình */}
       <Route
         path="/manager"
         element={
           <ProtectedRoute roles={['manager']}>
-            <Placeholder title="Trang quản lý (Manager)" />
+            <ManagerLayout />
           </ProtectedRoute>
         }
-      />
+      >
+        <Route index element={<ManagerDashboard />} />
+        <Route path="rooms" element={<ManagerRooms />} />
+        <Route path="services" element={<ManagerServices />} />
+        <Route path="bookings" element={<ManagerBookings />} />
+        <Route path="revenue" element={<ManagerRevenue />} />
+      </Route>
 
       <Route path="*" element={<Placeholder title="404 - Không tìm thấy trang" />} />
     </Routes>

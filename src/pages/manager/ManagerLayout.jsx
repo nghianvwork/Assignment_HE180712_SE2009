@@ -1,15 +1,17 @@
 import { NavLink, Link, Outlet, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../context/AuthContext'
-import './Admin.css'
+import '../admin/Admin.css'
 
 const MENU = [
-  { to: '/admin', label: 'Tổng quan', icon: '▦', end: true },
-  { to: '/admin/users', label: 'Tài khoản', icon: '👤' },
-  { to: '/admin/hotels', label: 'Khách sạn', icon: '🏨' },
+  { to: '/manager', label: 'Tổng quan', icon: '▦', end: true },
+  { to: '/manager/rooms', label: 'Phòng', icon: '🛏' },
+  { to: '/manager/services', label: 'Dịch vụ', icon: '🛎' },
+  { to: '/manager/bookings', label: 'Đặt phòng', icon: '📑' },
+  { to: '/manager/revenue', label: 'Doanh thu', icon: '📊' },
 ]
 
-/** Khung trang quản trị: sidebar điều hướng + vùng nội dung (Outlet) */
-export default function AdminLayout() {
+/** Khung khu quản lý khách sạn: sidebar điều hướng + vùng nội dung (Outlet) */
+export default function ManagerLayout() {
   const { user, logout } = useAuth()
   const navigate = useNavigate()
 
@@ -23,7 +25,7 @@ export default function AdminLayout() {
       <aside className="admin-sidebar">
         <Link to="/" className="admin-brand">
           Hotel Luxury
-          <span>Quản trị hệ thống</span>
+          <span>Khu quản lý</span>
         </Link>
 
         <nav className="admin-menu">

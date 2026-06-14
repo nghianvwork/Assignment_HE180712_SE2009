@@ -19,8 +19,8 @@ Xây dựng một nền tảng đặt phòng khách sạn nhiều chi nhánh (mu
 
 | Vai trò | Quyền hạn |
 |---------|-----------|
-| **Admin** | Quản lý toàn hệ thống: users, managers, tất cả hotels/rooms/services/bookings. Khóa/mở tài khoản. |
-| **Manager** | CRUD các **hotel mình sở hữu** (`ownerId`) cùng phòng & dịch vụ thuộc hotel đó. Xem & duyệt booking của hotel mình. |
+| **Admin** | Quản lý **tài khoản** (users/managers) & **khách sạn** toàn hệ thống. Khóa/mở tài khoản. Xem biểu đồ tổng quan (người dùng, khách sạn). *Phòng / dịch vụ / booking do manager phụ trách.* |
+| **Manager** | CRUD **phòng & dịch vụ** của hotel mình sở hữu (`ownerId`), xem & duyệt **booking** (khách theo từng phòng), theo dõi **doanh thu** (biểu đồ theo tháng & tuần). |
 | **User** | Duyệt hotel/phòng, tìm kiếm & lọc, đặt phòng kèm dịch vụ, xem & hủy booking của bản thân. |
 
 > ⚠️ json-server không kiểm tra phân quyền ở backend. Việc chặn quyền được thực hiện ở **phía React** (`ProtectedRoute` + lọc dữ liệu theo `ownerId` / `userId`).
@@ -85,15 +85,15 @@ Xây dựng một nền tảng đặt phòng khách sạn nhiều chi nhánh (mu
 - 🔐 Đăng ký / Đăng nhập
 
 ### Manager
-- 🏨 CRUD hotel mình sở hữu
-- 🛏️ CRUD phòng theo hotel
+- 🛏️ CRUD phòng theo hotel mình sở hữu
 - 🛎️ CRUD dịch vụ theo hotel
-- 📋 Xem & duyệt (confirm/cancel) booking của hotel mình
+- 📋 Xem & duyệt (confirm/cancel) booking — khách theo từng phòng
+- 📊 Doanh thu: biểu đồ theo **tháng** & theo **tuần**, doanh thu theo từng khách sạn
 
 ### Admin
-- 👤 Quản lý tài khoản (xem, khóa/mở, phân vai trò)
-- 🏨 Quản lý toàn bộ hotels / rooms / services
-- 📊 Quản lý toàn bộ bookings của hệ thống
+- 👤 Quản lý tài khoản (xem, khóa/mở, phân vai trò, xóa)
+- 🏨 Quản lý toàn bộ khách sạn (CRUD, gán chủ sở hữu)
+- 📊 Tổng quan hệ thống: biểu đồ **người dùng theo vai trò** & **khách sạn theo thành phố**
 
 ---
 
@@ -147,5 +147,5 @@ npm run dev
 - [x] Setup axios, router, react-bootstrap, AuthContext
 - [x] Đăng nhập / Đăng ký (giao diện Hotel Luxury + nối API json-server)
 - [ ] Chức năng User (duyệt, đặt phòng)
-- [ ] Trang Manager (CRUD hotel/room/service)
-- [x] Trang Admin (quản lý hệ thống: dashboard, users, hotels, rooms, services, bookings)
+- [x] Trang Manager (phòng, dịch vụ, booking, doanh thu — biểu đồ tháng/tuần, phạm vi hotel sở hữu)
+- [x] Trang Admin (tài khoản, khách sạn + biểu đồ người dùng & khách sạn)

@@ -7,10 +7,10 @@ import {
   updateService,
   deleteService,
 } from '../../services/serviceService'
-import { getHotels } from '../../services/hotelService'
 import { formatVND } from '../../utils/format'
 import ConfirmModal from '../../components/ConfirmModal'
 import FormField from '../../components/FormField'
+import { useOwnedHotels } from './useOwnedHotels'
 
 const EMPTY = {
   hotelId: '',
@@ -21,29 +21,38 @@ const EMPTY = {
   available: true,
 }
 
-/** Quản lý toàn bộ dịch vụ: lọc theo khách sạn + CRUD */
-export default function AdminServices() {
+/** Quản lý dịch vụ — chỉ trong các khách sạn manager sở hữu */
+export default function ManagerServices() {
+  const { hotels, hotelIds, loading } = useOwnedHotels()
   const [services, setServices] = useState([])
-  const [hotels, setHotels] = useState([])
   const [hotelFilter, setHotelFilter] = useState('')
   const [editing, setEditing] = useState(null)
   const [deleting, setDeleting] = useState(null)
 
-  const reload = () =>
-    getServices()
-      .then(setServices)
+  const reload = () => {
+    const ids = new Set(hotelIds)
+    return getServices()
+      .then((all) => setServices(all.filter((s) => ids.has(s.hotelId))))
       .catch(() => toast.error('Không tải được danh sách dịch vụ'))
+  }
 
   useEffect(() => {
-    reload()
-    getHotels().then(setHotels).catch(() => {})
-  }, [])
+    if (!loading) reload()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loading, hotels])
 
   const set = (key, value) => setEditing((f) => ({ ...f, [key]: value }))
   const hotelName = (id) => hotels.find((h) => h.id === id)?.name || '—'
 
+  const openForm = (svc) =>
+    setEditing(svc ? { ...EMPTY, ...svc } : { ...EMPTY, hotelId: hotelIds[0] || '' })
+
   const handleSubmit = async (e) => {
     e.preventDefault()
+    if (!hotelIds.includes(editing.hotelId)) {
+      toast.error('Bạn chỉ có thể thêm dịch vụ cho khách sạn của mình')
+      return
+    }
     const payload = { ...editing, price: Number(editing.price) || 0 }
     try {
       if (editing.id) {
@@ -80,23 +89,29 @@ export default function AdminServices() {
       <div className="admin-head">
         <h1 className="admin-title">
           Dịch vụ
-          <small>{services.length} dịch vụ trên toàn hệ thống</small>
+          <small>{services.length} dịch vụ trong khách sạn của bạn</small>
         </h1>
-        <button className="admin-btn-primary" onClick={() => setEditing({ ...EMPTY })}>
+        <button
+          className="admin-btn-primary"
+          onClick={() => openForm(null)}
+          disabled={!hotels.length}
+        >
           + Thêm dịch vụ
         </button>
       </div>
 
-      <div className="admin-filters">
-        <Form.Select value={hotelFilter} onChange={(e) => setHotelFilter(e.target.value)}>
-          <option value="">Mọi khách sạn</option>
-          {hotels.map((h) => (
-            <option key={h.id} value={h.id}>
-              {h.name}
-            </option>
-          ))}
-        </Form.Select>
-      </div>
+      {hotels.length > 1 && (
+        <div className="admin-filters">
+          <Form.Select value={hotelFilter} onChange={(e) => setHotelFilter(e.target.value)}>
+            <option value="">Mọi khách sạn của tôi</option>
+            {hotels.map((h) => (
+              <option key={h.id} value={h.id}>
+                {h.name}
+              </option>
+            ))}
+          </Form.Select>
+        </div>
+      )}
 
       <div className="admin-card">
         <Table className="admin-table" responsive>
@@ -132,7 +147,7 @@ export default function AdminServices() {
                     size="sm"
                     variant="outline-secondary"
                     className="me-2"
-                    onClick={() => setEditing({ ...EMPTY, ...s })}
+                    onClick={() => openForm(s)}
                   >
                     Sửa
                   </Button>
