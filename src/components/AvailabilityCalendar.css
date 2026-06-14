@@ -1,0 +1,104 @@
+/* ===== Lịch tình trạng phòng — đồng bộ theme luxury ===== */
+.cal {
+  background: #fff;
+}
+.cal-head {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  margin-bottom: 14px;
+}
+.cal-head strong {
+  font-family: var(--font-display);
+  font-size: 18px;
+  color: var(--c-ink);
+  min-width: 90px;
+  text-align: center;
+}
+.cal-head button {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid #e3ded4;
+  background: #fff;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+  color: var(--c-ink);
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+.cal-head button:hover {
+  background: var(--c-gold);
+  color: #fff;
+  border-color: var(--c-gold);
+}
+.cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+}
+.cal-weekday {
+  text-align: center;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--c-gold);
+  padding: 4px 0;
+}
+.cal-cell {
+  min-height: 62px;
+  border-radius: 5px;
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  border: 1px solid #f0ece4;
+}
+.cal-cell.empty {
+  border: none;
+  background: transparent;
+}
+.cal-cell.free {
+  background: #f3f8f4;
+}
+.cal-cell.booked {
+  background: #fdecec;
+}
+.cal-date {
+  font-weight: 600;
+  font-size: 13px;
+  color: #3b3b3b;
+}
+.cal-tag {
+  font-size: 11px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #c0392b;
+}
+.cal-cell.free .cal-tag {
+  color: #2e7d43;
+}
+.cal-legend {
+  display: flex;
+  gap: 18px;
+  justify-content: center;
+  margin-top: 14px;
+  font-size: 12.5px;
+  color: var(--c-muted);
+}
+.cal-legend .dot {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+.cal-legend .dot.free {
+  background: #cfe8d6;
+}
+.cal-legend .dot.booked {
+  background: #f6caca;
+}

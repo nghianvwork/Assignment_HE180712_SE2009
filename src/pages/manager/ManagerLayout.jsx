@@ -6,6 +6,7 @@ const MENU = [
   { to: '/manager', label: 'Tổng quan', icon: '▦', end: true },
   { to: '/manager/hotels', label: 'Khách sạn', icon: '🏨' },
   { to: '/manager/rooms', label: 'Phòng', icon: '🛏' },
+  { to: '/manager/calendar', label: 'Lịch trống', icon: '📅' },
   { to: '/manager/services', label: 'Dịch vụ', icon: '🛎' },
   { to: '/manager/pricing', label: 'Giá theo mùa', icon: '🏷' },
   { to: '/manager/vouchers', label: 'Khuyến mãi', icon: '🎟' },
